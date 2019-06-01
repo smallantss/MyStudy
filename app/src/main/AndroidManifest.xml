@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.mystudy">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".RxJava2Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".FragmentActivity"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".LoadPluginActivity" />
+        <activity android:name=".VpIndicatorActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".AopActivity">
+
+        </activity>
+        <activity android:name="com.example.dnbus.plugin.ProxyActivity" />
+
+        <service android:name=".aidl.MyService" />
+        <service
+            android:name=".aidl.MessengerService"
+            android:process=":remote" /> <!-- 唯一标识，外部应用可通过该属性访问 -->
+        <provider
+            android:name=".cp.MyContentProvider"
+            android:authorities="com.example.mystudy.provoder"
+            android:process=":provider" />
+    </application>
+
+</manifest>

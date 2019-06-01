@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VpIndicatorActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+    <TextView
+        android:text="1"
+        android:onClick="onClick"
+        android:textColor="#FFF"
+        android:id="@+id/view"
+        android:layout_marginLeft="10px"
+        android:layout_marginTop="20px"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#000000"
+        android:layout_width="100px"
+        android:layout_height="100px"/>
+
+    <View
+        android:id="@+id/vie"
+        app:layout_constraintLeft_toRightOf="@id/view"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#000000"
+        android:layout_marginLeft="15px"
+        android:layout_width="100px"
+        android:layout_height="100px"/>
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/view2" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="#FF0000"
+        app:layout_constraintBottom_toBottomOf="@id/view1"
+        app:layout_constraintLeft_toRightOf="@id/view1"
+        app:layout_constraintRight_toLeftOf="@id/view3" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="#FF0000"
+        app:layout_constraintBottom_toBottomOf="@id/view1"
+        app:layout_constraintLeft_toRightOf="@id/view2"
+        app:layout_constraintRight_toLeftOf="@id/view4" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginLeft="16dp"
+        android:background="#FF0000"
+        app:layout_constraintBottom_toBottomOf="@+id/view1"
+        app:layout_constraintLeft_toRightOf="@id/view3"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <View
+        android:id="@+id/viewMove"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:background="#528B8B"
+        app:layout_constraintLeft_toLeftOf="@+id/view1"
+        app:layout_constraintRight_toRightOf="@+id/view1"
+        app:layout_constraintTop_toTopOf="@id/view1" />
+
+
+</android.support.constraint.ConstraintLayout>

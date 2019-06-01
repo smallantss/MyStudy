@@ -1,0 +1,110 @@
+IPC机制
+一.概念
+    1.定义:IPC（Inter-Process-Communication）进程间通信，两个不同进程之间进行数据交换的过程。
+    2.线程及进程
+      线程：CPU调度的最小单元，同时线程是一种有限的系统资源。
+      进程：一般指一个程序或应用，一个进行可以包含多个线程。
+    3.Android中进程间通信的方式：Binder Socket
+    4.开启多进程只需要在manifest中的四大组件指定android:process属性
+    5.多进程带来的问题
+      ①.静态成员和单例模式完全失效
+      ②.线程同步机制完全失效
+      ③.SP可靠性下降
+      ④.Application会多次创建
+    6.多进程问题原因
+      Android为每个进程分配了独立的虚拟机，不同虚拟机在内存分配上有不同的地址，导致在不同虚拟机中访问同一个类对象
+      会产生多个副本，一个进程中修改只会影响当前进程。
+    7.序列化
+      Serializable接口:对象的序列化采用ObjectInputStream
+      Parcelable接口:序列化功能由writeToParcel完成，最终通过Parcel的write方法完成，反序列化通过CREATOR完成，
+                    最终通过Parcel的read方法完成。
+    8.适用情况
+      Serializable:是Java的序列化接口，使用简单开销大，需要大量IO操作。
+      Parcelable:适用于Android平台，效率高。主要用在内存序列化。
+
+二.Binder
+    1.定义：Binder是Android中的一个类，实现了IBinder接口，基于C-S模式
+      从IPC来说，是Android中一种跨进程通信方式。
+      从Framework层来说，Binder是ServiceManager连接Manager(ActivityManager，ServiceManager)的桥梁。
+      从应用层来说，Binder是客户端和服务的通信的媒介。当bindService时，服务端会返回一个包含服务端业务调用的Binder对象，
+      通过Binder对象，客户端可以获取服务端提供的服务或数据。
+    2.进程空间划分
+      用户空间：数据不共享
+      内核空间：数据共享（所有进程共享）
+    3.Android中的IPC方式
+      ①.Bundle
+         实现了Parcelable接口，简单易用，只能传Bundle支持的数据类型。使用四大组件间通信
+      ②.使用文件共享
+         进程通过读/写同一个文件来交换数据，可能会带来并发读写的问题。比如读出的内容不是新的，写的话更严重。(使用线程同步)
+         由于SP底层通过XML文件存储，系统对其读写有一定的缓存，内存中有SP缓存，因此多进程SP不可靠。高并发读写大概率丢失数据
+         不适合高并发，无法做到线程间即时通信。
+      ③.Messenger
+         特点:
+            1.可以在不同进程中传递Messenger对象，轻量级IPC，底层实现是AIDL。
+            2.服务端不需考虑线程同步，一次只处理一个请求(串行)，不适合大量并发请求
+            3.无法做到客户端调用服务端的方法。
+         服务端:
+            1.创建Service处理客户端请求
+            2.创建Messenger对象，通过构造函数传入Handler
+            3.onBind()返回Messenger底层的Binder.
+            4.若需回应客户端，则通过msg.replyTo获取到服务端的Messenger对象，通过Messenger.send(Message)发送消息给客户端
+         客户端:
+            1.绑定服务端Service
+            2.绑定成功后用服务端返回的IBinder对象创建一个Messenger，通过Messenger.send(Message)向服务端发消息
+            3.若需服务端响应客户端，则客户端需像服务端一样，创建一个新的Messenger，和一个Handler（构造函数需要）
+            4.在发送消息的时候把这个Messenger对象通过Message的replyTo传递给服务端，服务端通过这个replyTo可以回应客户端。
+      ④.AIDL
+         支持一对多并发通信，支持实时通信，使用复杂，需处理线程同步
+         使用:新建IAIDL.aidl文件，是一个接口，里面写上接口方法，锤他一下，会生成IAIDL.java文件
+         注意:
+            1.若AIDL文件中用到了自定义的Parcelable对象，必须新建一个同名的AIDL文件，声明为parcelable类型
+            2.除了基本数据类型，其他类型参数必须标上in(输入) out(输出) 或者inout(输入输出)
+         服务端.
+            继承Service，在onBind的时候返回一个IBinder对象，这个对象通过new IAIDL.Stub实现，会重写接口里方法。
+         客户端.
+            Activity里bindService(intent,conn,BIND_AUTO_CREATE)，conn可以通过new ServiceConnection()实现，
+            并重写onServiceConnected(name,IBinder)和onServiceDisconnected(name)方法，connected的时候，通过
+            IBinder.Stub.asInterface(IBinder)转为我们的IAIDL类型，即获取到服务端实例，通信通过这个实例就行。
+         分析:
+            IAIDL.Stub:extends Binder implement IAIDL 接口
+               onTransact(code,data,reply,flag):主要是来操作客户端传递的数据
+                   code:Int唯一标识，客户端传递此参数告诉服务器执行哪个方法
+                   data:客户端传递的参数
+                   reply:服务器返回的值
+                   flag:表面是否有返回值，0有，1无
+               asInterface():
+                   最终返回了new IAIDL.Stub.Proxy(obj)代理对象
+            自己实现:
+               服务端:(接受客户端传递数据，计算并返回)
+                   MyBinder extends Binder,重写onTransact()
+                   when(code){
+                       0x111:
+                           data.enforceInterface(DESCRIPTION)//对应客户端(writeInterfaceToken)，标识服务名称
+                           int arg0 = data.readInt()   //读取客户端传递的数据
+                           int arg1 = data.readInt()
+                           val result = arg0*arg1      //服务端计算结果
+                           reply.writeInt(result)      //将数据写入到reply中返回
+                           return true                 //代表成功返回
+                   }
+               客户端:(发送原始数据到指定服务器，并接受远程服务返回的数据)
+                   val data = Parcel.obtain()
+                   data.writeInterfaceToken("RemoteService")//标识是哪个远程服务名
+                   data.writeInt(10)//写入数据
+                   data.writeInt(20)
+                   binder.transact(0x111,data,reply,0) //对应Binder的onTransat()方法
+      ⑤.ContentProvider
+         Android提供专门用于不同应用间进行数据共享的方式。底层实现是Binder
+         系统的ContentProvider，通讯录，日程表，通过其insert delete update query 方法进行操作。
+         支持一对多并发数据共享。
+         使用:
+            创建类继承ContentProvider，实现onCreate()增删改查及getType(返回Uri请求对应的MIME类型)等抽象方法。
+            manifest中注册，authorities是唯一标识，外部应用可通过该属性访问
+      ⑥.Socket
+         功能强大，可通过网络传输字节流，支持一对多并发实时通信。
+         分为流式套接字和用户数据报套接字，分别对应TCP和UDP协议。
+         TCP:面向连接的协议，提供稳定的双向通信功能。建立连接需 三次握手。提供超时重传机制，稳定性高
+         UDP:无连接，提供不稳定的单向通信功能，效率高，但不保证数据一定能正确传输。
+
+
+
+

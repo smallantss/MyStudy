@@ -1,0 +1,35 @@
+textView2.text = "接收的线程名->${Thread.currentThread().name}"
+                        L("onComplete->${Thread.currentThread().name}")
+                    }
+
+                })
+
+//        Observable.just("aaa")
+//                .subscribe(object : Observer<String> {
+//
+//                    override fun onSubscribe() {
+//                        L("onSubscribe")
+//                    }
+//
+//                    override fun onNext(t: String) {
+//                        L("onNext->$t")
+//                    }
+//
+//                    override fun onError(e: Throwable) {
+//                        L("onError->")
+//                    }
+//
+//                    override fun onComplete() {
+//
+//                        L("onComplete->${Thread.currentThread().name}")
+//                    }
+//
+//                })
+
+
+    }
+
+    fun L(s: String) {
+        Log.e("TAG", s)
+    }
+}

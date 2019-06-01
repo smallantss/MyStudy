@@ -1,0 +1,32 @@
+fun onNext(t: String) {
+                    }
+
+                    override fun onError(e: Throwable) {
+                    }
+
+
+                })
+
+        io.reactivex.Observable.create<String> {
+            it.onNext(Thread.currentThread().name)
+            it.onNext("aaa")
+            it.onComplete()
+        }
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : io.reactivex.Observer<String> {
+                    override fun onSubscribe(d: Disposable) {
+                        L("onSubscribe")
+                    }
+
+                    override fun onNext(t: String) {
+                        L("onNext->$t")
+                        textView.text = "发送的线程名->$t"
+                    }
+
+                    override fun onError(e: Throwable) {
+                        L("onError->")
+                    }
+
+                    override fun onComplete() {
+                        
