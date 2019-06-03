@@ -1,6 +1,7 @@
-package com.example
+package com.example.mystudy.designpattern
 
-class Test {
+//工厂模式
+class FactoryPattern {
 
     companion object {
         @JvmStatic
@@ -40,4 +41,3 @@ class ReflectFactory {
         return instance
     }
 }
-
