@@ -6,6 +6,22 @@
     android:layout_height="wrap_content"
     tools:context=".DragActivity">
 
+    <Button
+        android:id="@+id/btnRedo"
+        android:text="撤销"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnClear"
+        android:text="清空"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@id/btnRedo"
+        app:layout_constraintTop_toBottomOf="@id/btnRedo"/>
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="100dp"

@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import com.example.mystudy.utils.L
 import kotlinx.android.synthetic.main.activity_drag.*
 
 class DragActivity : AppCompatActivity(){
@@ -25,7 +26,7 @@ class DragActivity : AppCompatActivity(){
     var downX = 0f
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
-        L("onTouchEvent")
+        L.e("onTouchEvent")
         when(event?.action){
             MotionEvent.ACTION_DOWN->{
                 downX = event.x
@@ -109,7 +110,4 @@ class DragActivity : AppCompatActivity(){
         }*/
     }
 
-    fun L(a: Any) {
-        Log.e("TAG", a.toString())
-    }
 }
