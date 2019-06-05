@@ -1,14 +1,17 @@
 package com.example.mystudy
 
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import com.example.dnbus.DnBus
 import com.example.dnbus.Subscribe
 import com.example.dnbus.ThreadMode
 import com.example.mystudy.utils.ScreenDensityUtils
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,6 +22,10 @@ class MainActivity : AppCompatActivity() {
         ScreenDensityUtils.initData(this,application)
 
         DnBus.getInstance().register(this)
+
+        ObjectAnimator.ofFloat(tv,"translationX",0f,10f,100f)
+                .setDuration(200)
+                .start()
 
     }
 
