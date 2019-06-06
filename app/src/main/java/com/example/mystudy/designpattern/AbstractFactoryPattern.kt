@@ -1,5 +1,8 @@
 package com.example.mystudy.designpattern
 
+/**
+ * 抽象工厂模式
+ */
 class AbstractFactoryPattern {
 
     companion object {

@@ -1,6 +1,8 @@
 package com.example.mystudy.designpattern
 
-//工厂模式
+/**
+ * 工厂模式
+ */
 class FactoryPattern {
 
     companion object {
@@ -8,9 +10,7 @@ class FactoryPattern {
         fun main(args: Array<String>) {
             val product = ConcreteFactory().create()
             product.method()
-
         }
-
     }
 }
 

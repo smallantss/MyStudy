@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mystudy">
 
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DragActivity">
+        <activity android:name=".DragWordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -17,15 +19,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RxJava2Activity">
+        <activity android:name=".DragActivity">
+
         </activity>
+        <activity android:name=".RxJava2Activity"></activity>
         <activity
             android:name=".FragmentActivity"
             android:launchMode="singleTask" />
         <activity android:name=".LoadPluginActivity" />
         <activity android:name=".VpIndicatorActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".AopActivity"></activity>
+        <activity android:name=".AopActivity" />
         <activity android:name="com.example.dnbus.plugin.ProxyActivity" />
 
         <service android:name=".aidl.MyService" />

@@ -1,6 +1,8 @@
 package com.example.mystudy.designpattern
 
-
+/**
+ * 装饰模式
+ */
 class DecoratePattern {
 
     companion object {

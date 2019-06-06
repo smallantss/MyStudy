@@ -18,7 +18,6 @@ class DrawViewGroup @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr), View.OnTouchListener {
 
-
     private lateinit var mCanvas: Canvas
     private var downPointF: PointF? = null
     private var mPath = Path()
@@ -88,7 +87,6 @@ class DrawViewGroup @JvmOverloads constructor(
             bitmap?.recycle()
             bitmap = null
             invalidate()
-
         }
         setOnTouchListener(this)
     }
