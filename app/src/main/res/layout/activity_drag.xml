@@ -16,7 +16,7 @@
         android:layout_height="0dp"/>
 
     <com.example.mystudy.widgets.MyView
-        android:id="@+id/view"
+        android:id="@+id/myView"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintLeft_toLeftOf="parent"

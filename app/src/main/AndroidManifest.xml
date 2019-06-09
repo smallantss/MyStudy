@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DragWordActivity">
+        <activity android:name=".RvActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -19,10 +19,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DragWordActivity"></activity>
         <activity android:name=".DragActivity">
 
         </activity>
-        <activity android:name=".RxJava2Activity"></activity>
+        <activity android:name=".RxJava2Activity" />
         <activity
             android:name=".FragmentActivity"
             android:launchMode="singleTask" />
