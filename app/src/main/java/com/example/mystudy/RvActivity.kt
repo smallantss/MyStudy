@@ -19,12 +19,15 @@ import java.util.*
 
 class RvActivity : AppCompatActivity() {
 
+    private lateinit var datas: ArrayList<String>
+    private lateinit var mAdapter:RvAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rv)
 
 
-        val datas = ArrayList<String>()
+        datas = ArrayList<String>()
         for (i in 0..49){
             val nextInt = Random().nextInt(5)
             datas.add(when(nextInt){
@@ -48,7 +51,42 @@ class RvActivity : AppCompatActivity() {
         }
 
         rv.layoutManager = CustomLayoutManager3()
-        rv.adapter = RvAdapter(datas)
+        mAdapter= RvAdapter(datas)
+        rv.adapter = mAdapter
+    }
+
+    fun onClick(v:View){
+        when(v.id){
+            R.id.tvAdd->{
+                val nextInt = Random().nextInt(datas.size)
+                datas.add(nextInt,when(nextInt){
+                    0->{
+                        "是"
+                    }
+                    1->{
+                        "明天"
+                    }
+                    2->{
+                        "辛啊啊"
+                    }
+                    3->{
+                        "长得真帅"
+                    }
+                    4->{
+                        "当真是这样？"
+                    }
+                    else -> ""
+                }+nextInt)
+                mAdapter.notifyItemInserted(nextInt)
+            }
+            R.id.tvRemove->{
+                if (datas.size==1) return
+                val nextInt = Random().nextInt(datas.size)
+                datas.removeAt(nextInt)
+                mAdapter.notifyItemRemoved(nextInt)
+            }
+        }
+
     }
 
 }
