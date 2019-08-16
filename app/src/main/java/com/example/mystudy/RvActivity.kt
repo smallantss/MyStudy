@@ -1,19 +1,15 @@
 package com.example.mystudy
 
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import com.example.mystudy.utils.L
-import com.example.mystudy.widgets.CustomLayoutManager
-import com.example.mystudy.widgets.CustomLayoutManager2
 import com.example.mystudy.widgets.CustomLayoutManager3
-import com.example.mystudy.widgets.CustomLayoutManagerRecyclered
 import kotlinx.android.synthetic.main.activity_rv.*
 import java.util.*
 

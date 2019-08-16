@@ -1,7 +1,7 @@
 package com.example.mystudy.widgets
 
 import android.graphics.Rect
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import com.example.mystudy.utils.L
 
@@ -26,7 +26,7 @@ class CustomLayoutManager4 : RecyclerView.LayoutManager() {
     private val itemRects = ArrayList<Rect>()
 
     //2.对Item进行布局
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
+    override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State?) {
         L.e(TAG, "onLayoutChildren->before detach $childCount")
         //没有Item
         if (itemCount == 0) {
@@ -145,12 +145,12 @@ class CustomLayoutManager4 : RecyclerView.LayoutManager() {
             val child = getChildAt(it)
             if (travel > 0) {
                 //下往上滑,回收屏幕上越界的View
-                if (getDecoratedBottom(child) - travel < 0) {
+                if (getDecoratedBottom(child!!) - travel < 0) {
                     removeAndRecycleView(child, recycler)
                 }
             } else if (travel < 0) {
                 //上往下滑，回收屏幕底部越界的View   Rv可显示的最底部位置
-                if (getDecoratedTop(child) - travel > (height - paddingBottom)) {
+                if (getDecoratedTop(child!!) - travel > (height - paddingBottom)) {
                     removeAndRecycleView(child, recycler)
                 }
             }
@@ -164,7 +164,7 @@ class CustomLayoutManager4 : RecyclerView.LayoutManager() {
             //获取屏幕上最后一个显示的View
             val view = getChildAt(childCount - 1)
             //获取屏幕上最后一个显示View的下一个View的索引
-            val minPos = getPosition(view) + 1
+            val minPos = getPosition(view!!) + 1
             for (i in minPos until itemCount) {
                 val nextRect = itemRects[i]
                 if (Rect.intersects(visibleArea, nextRect)) {
@@ -182,7 +182,7 @@ class CustomLayoutManager4 : RecyclerView.LayoutManager() {
             //获取屏幕上第一个显示的View
             val view = getChildAt(0)
             //屏幕上第一个显示的View的上一个View
-            val maxPos = getPosition(view) - 1
+            val maxPos = getPosition(view!!) - 1
             maxPos.downTo(0).forEach {
                 val preRect = itemRects[it]
                 if (Rect.intersects(visibleArea, preRect)) {

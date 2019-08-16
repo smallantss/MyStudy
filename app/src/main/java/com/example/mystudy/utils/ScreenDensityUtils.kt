@@ -13,6 +13,7 @@ class ScreenDensityUtils private constructor(){
         var appDensity = 0f
         var appScaleDensity = 0f
 
+        //360 * 3 = 1080
         val difineW = 360f
 
 
