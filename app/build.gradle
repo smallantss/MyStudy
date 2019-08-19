@@ -55,6 +55,11 @@ dependencies {
     testImplementation "androidx.paging:paging-common:$paging_version"
     // optional - RxJava support For Kotlin use paging-rxjava2-ktx
     implementation "androidx.paging:paging-rxjava2:$paging_version"
+    def nav_version = "2.0.0"
+    // Kotlin
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
 }
 
 repositories {
