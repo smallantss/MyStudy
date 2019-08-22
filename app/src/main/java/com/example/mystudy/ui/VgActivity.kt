@@ -1,20 +1,10 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
-import com.example.mystudy.utils.L
-import com.example.mystudy.widgets.CustomLayoutManager
-import com.example.mystudy.widgets.CustomLayoutManager2
-import com.example.mystudy.widgets.CustomLayoutManager3
-import com.example.mystudy.widgets.CustomLayoutManagerRecyclered
-import kotlinx.android.synthetic.main.activity_rv.*
+import com.example.mystudy.R
 import kotlinx.android.synthetic.main.activity_vg.*
 import java.util.*
 

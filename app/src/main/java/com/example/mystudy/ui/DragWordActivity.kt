@@ -1,4 +1,4 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
 import android.graphics.Color
 import android.graphics.Point
@@ -14,6 +14,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.example.mystudy.R
 import com.example.mystudy.widgets.FlowLayoutManager
 import com.example.mystudy.widgets.ItemPositionModel
 import com.example.mystudy.widgets.ShowItem
@@ -239,7 +240,7 @@ class DragWordActivity : AppCompatActivity() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             return if (viewType == 0) {
                 //正文内容类型
-                MyHolder(View.inflate(this@DragWordActivity,R.layout.flow_item, null))
+                MyHolder(View.inflate(this@DragWordActivity, R.layout.flow_item, null))
             } else {
                 //占位符类型
                 MyHolderDivider(View.inflate(this@DragWordActivity, R.layout.flow_divider, null))

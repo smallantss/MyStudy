@@ -1,15 +1,11 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import com.example.dnbus.DnBus
-import com.example.dnbus.Subscribe
-import com.example.dnbus.ThreadMode
-import com.example.mystudy.utils.ScreenDensityUtils
+import com.example.mystudy.R
 import kotlin.random.Random
 
 class AopActivity : AppCompatActivity() {
@@ -23,7 +19,7 @@ class AopActivity : AppCompatActivity() {
     }
 
     fun onClick(view:View){
-        startActivity(Intent(this,FragmentActivity::class.java))
+        startActivity(Intent(this, FragmentActivity::class.java))
 //        shakeFun()
 //        talk()
     }

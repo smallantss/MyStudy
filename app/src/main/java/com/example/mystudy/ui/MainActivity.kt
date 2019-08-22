@@ -1,15 +1,15 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
 import android.animation.ObjectAnimator
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.animation.LinearInterpolator
 import android.widget.Toast
 import com.example.dnbus.DnBus
 import com.example.dnbus.Subscribe
 import com.example.dnbus.ThreadMode
+import com.example.mystudy.R
 import com.example.mystudy.utils.ScreenDensityUtils
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     fun onClick(view:View){
         DnBus.getInstance().post("aaaaa")
-        startActivity(Intent(this,MyIntentService::class.java))
+        startActivity(Intent(this, MyIntentService::class.java))
     }
 
 
