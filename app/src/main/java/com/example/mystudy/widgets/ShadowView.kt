@@ -61,6 +61,7 @@ class ShadowView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas?) {
+        measuredWidth
         //绘制出边界
         if (BuildConfig.DEBUG) {
             canvas?.drawRect(0f, 0f, width.toFloat(), height.toFloat(), Paint().apply {
