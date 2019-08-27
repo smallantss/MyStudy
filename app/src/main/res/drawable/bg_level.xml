@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:minLevel="10" android:maxLevel="10">
+        <shape android:shape="rectangle">
+            <solid android:color="#ff0"/>
+        </shape>
+    </item>
+
+    <item android:maxLevel="20" android:minLevel="20">
+        <shape android:shape="rectangle">
+            <solid android:color="#f00"/>
+        </shape>
+    </item>
+</level-list>

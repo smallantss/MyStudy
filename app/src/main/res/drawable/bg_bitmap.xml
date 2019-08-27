@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap android:src="@drawable/ic"
+    android:antialias="true"
+    android:dither="true"
+    android:alpha="0.5"
+    android:filter="true"
+    android:autoMirrored="true"
+    android:gravity="center"
+    android:mipMap="true"
+    android:tileMode="clamp"
+    android:tint="@color/colorAccent"
+    android:tintMode="src_in"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+</bitmap>
