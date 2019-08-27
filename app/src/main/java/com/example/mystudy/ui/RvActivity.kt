@@ -1,26 +1,23 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
 import android.graphics.Color
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import com.example.mystudy.R
 import com.example.mystudy.utils.L
-import com.example.mystudy.widgets.CustomLayoutManager
-import com.example.mystudy.widgets.CustomLayoutManager2
 import com.example.mystudy.widgets.CustomLayoutManager3
-import com.example.mystudy.widgets.CustomLayoutManagerRecyclered
 import kotlinx.android.synthetic.main.activity_rv.*
 import java.util.*
 
 class RvActivity : AppCompatActivity() {
 
     private lateinit var datas: ArrayList<String>
-    private lateinit var mAdapter:RvAdapter
+    private lateinit var mAdapter: RvAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +54,7 @@ class RvActivity : AppCompatActivity() {
 
     fun onClick(v:View){
         when(v.id){
-            R.id.tvAdd->{
+            R.id.tvAdd ->{
                 val nextInt = Random().nextInt(datas.size)
                 datas.add(nextInt,when(nextInt){
                     0->{
@@ -79,7 +76,7 @@ class RvActivity : AppCompatActivity() {
                 }+nextInt)
                 mAdapter.notifyItemInserted(nextInt)
             }
-            R.id.tvRemove->{
+            R.id.tvRemove ->{
                 if (datas.size==1) return
                 val nextInt = Random().nextInt(datas.size)
                 datas.removeAt(nextInt)

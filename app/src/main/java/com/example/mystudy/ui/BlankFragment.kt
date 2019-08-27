@@ -1,13 +1,12 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.mystudy.R
 import kotlinx.android.synthetic.main.fragment_blank.*
 
 

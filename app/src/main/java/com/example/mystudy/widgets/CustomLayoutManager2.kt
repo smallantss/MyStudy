@@ -1,7 +1,7 @@
 package com.example.mystudy.widgets
 
 import android.graphics.Rect
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import com.example.mystudy.utils.L
 
@@ -26,7 +26,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
     private val itemRects = ArrayList<Rect>()
 
     //2.对Item进行布局
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
+    override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State?) {
         L.e(TAG, "onLayoutChildren->before detach $childCount")
         //没有Item
         if (itemCount == 0) {
@@ -117,7 +117,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
     var travel = 0
 
     //4.增加滑动限制，顶部不能上滑 底部不能下滑
-    override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler?, state: RecyclerView.State?): Int {
+    override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State?): Int {
         L.e(TAG, "scrollVerticallyBy dy->$dy,childCount->$childCount,scrapCache->${recycler!!.scrapList.size}")
         if (childCount <= 0) {
             return dy
@@ -142,7 +142,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
         //当travel>0,下往上滑，将顶部item移除，所以需要判断当前的item是不是超过了上边界（y=0）
         //屏幕上从最后一个到第0个
         (childCount - 1).downTo(0).forEach {
-            val child = getChildAt(it)
+            val child = getChildAt(it)!!
             if (travel > 0) {
                 //下往上滑,回收屏幕上越界的View
                 if (getDecoratedBottom(child) - travel < 0) {
@@ -164,7 +164,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
             //获取屏幕上最后一个显示的View
             val view = getChildAt(childCount - 1)
             //获取屏幕上最后一个显示View的下一个View的索引
-            val minPos = getPosition(view) + 1
+            val minPos = getPosition(view!!) + 1
             for (i in minPos until itemCount) {
                 val nextRect = itemRects[i]
                 if (Rect.intersects(visibleArea, nextRect)) {
@@ -182,7 +182,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
             //获取屏幕上第一个显示的View
             val view = getChildAt(0)
             //屏幕上第一个显示的View的上一个View
-            val maxPos = getPosition(view) - 1
+            val maxPos = getPosition(view!!) - 1
             maxPos.downTo(0).forEach {
                 val preRect = itemRects[it]
                 if (Rect.intersects(visibleArea, preRect)) {

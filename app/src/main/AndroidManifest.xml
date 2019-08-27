@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.mystudy">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
         android:allowBackup="true"
+        android:appComponentFactory="a"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".RvActivity">
+        android:theme="@style/AppTheme"
+        tools:replace="android:appComponentFactory">
+        <activity android:name=".ui.WeatherActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -19,18 +22,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DragWordActivity"></activity>
-        <activity android:name=".DragActivity">
-
+        <activity android:name=".ui.ShadowActivity">
         </activity>
-        <activity android:name=".RxJava2Activity" />
+        <activity android:name=".mvvm.NavigationActivity"></activity>
+        <activity android:name=".mvvm.LifecycleActivity" />
+        <activity android:name=".ui.RvActivity" />
+        <activity android:name=".ui.DragWordActivity" />
+        <activity android:name=".ui.DragActivity" />
+        <activity android:name=".ui.RxJava2Activity" />
         <activity
-            android:name=".FragmentActivity"
+            android:name=".ui.FragmentActivity"
             android:launchMode="singleTask" />
-        <activity android:name=".LoadPluginActivity" />
-        <activity android:name=".VpIndicatorActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".AopActivity" />
+        <activity android:name=".ui.LoadPluginActivity" />
+        <activity android:name=".ui.VpIndicatorActivity" />
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.AopActivity" />
         <activity android:name="com.example.dnbus.plugin.ProxyActivity" />
 
         <service android:name=".aidl.MyService" />

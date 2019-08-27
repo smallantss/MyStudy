@@ -1,11 +1,9 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.mystudy.rx.Observable
-import com.example.mystudy.rx.Observer
-import io.reactivex.Scheduler
+import com.example.mystudy.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

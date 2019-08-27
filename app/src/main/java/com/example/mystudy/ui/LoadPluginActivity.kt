@@ -1,12 +1,12 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
-import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.example.dnbus.plugin.PluginManager
 import com.example.dnbus.plugin.ProxyActivity
+import com.example.mystudy.R
 
 /**
  * 加载插件的Activity

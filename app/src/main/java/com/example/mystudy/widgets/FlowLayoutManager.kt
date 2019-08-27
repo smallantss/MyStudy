@@ -1,6 +1,6 @@
 package com.example.mystudy.widgets
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.R.attr.right
 import android.R.attr.top
 import android.graphics.Rect

@@ -1,18 +1,15 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
 import android.net.Uri
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.*
 import android.widget.Toast
+import com.example.mystudy.R
 import com.example.mystudy.utils.L
 import kotlinx.android.synthetic.main.activity_drag.*
 import kotlinx.android.synthetic.main.layout_float_window.view.*
@@ -137,7 +134,7 @@ class DragActivity : AppCompatActivity() {
             return@setOnTouchListener super.onTouchEvent(event)
         }
         windowView.tv0.setOnClickListener {
-            startActivity(Intent(this@DragActivity,FragmentActivity::class.java))
+            startActivity(Intent(this@DragActivity, FragmentActivity::class.java))
         }
         windowView.tv2.setOnClickListener {
             wm.removeView(windowView)

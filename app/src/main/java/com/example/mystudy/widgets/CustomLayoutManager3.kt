@@ -1,7 +1,7 @@
 package com.example.mystudy.widgets
 
 import android.graphics.Rect
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import com.example.mystudy.utils.L
 import kotlin.math.max
@@ -16,7 +16,7 @@ class CustomLayoutManager3 : RecyclerView.LayoutManager() {
                 RecyclerView.LayoutParams.WRAP_CONTENT)
     }
 
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State?) {
+    override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State?) {
         if (itemCount<=0){
             detachAndScrapAttachedViews(recycler)
             return
