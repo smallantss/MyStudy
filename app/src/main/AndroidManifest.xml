@@ -13,8 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:name=".ui.App"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".ui.WeatherActivity">
+        <activity android:name=".ui.AopActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -22,9 +23,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ShadowActivity">
+        <activity android:name=".ui.WeatherActivity">
+
         </activity>
-        <activity android:name=".mvvm.NavigationActivity"></activity>
+        <activity android:name=".ui.AopActivity"/>
+        <activity android:name=".ui.ShadowActivity"></activity>
+        <activity android:name=".mvvm.NavigationActivity" />
         <activity android:name=".mvvm.LifecycleActivity" />
         <activity android:name=".ui.RvActivity" />
         <activity android:name=".ui.DragWordActivity" />
@@ -36,7 +40,7 @@
         <activity android:name=".ui.LoadPluginActivity" />
         <activity android:name=".ui.VpIndicatorActivity" />
         <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.AopActivity" />
+        <!--<activity android:name=".ui.AopActivity" />-->
         <activity android:name="com.example.dnbus.plugin.ProxyActivity" />
 
         <service android:name=".aidl.MyService" />
