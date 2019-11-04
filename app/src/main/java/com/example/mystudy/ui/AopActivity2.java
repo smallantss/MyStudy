@@ -56,7 +56,6 @@ public class AopActivity2 extends AppCompatActivity {
 
     public void noParam() {
         Log.e(TAG, "这是noParam的方法");
-
     }
 
     public void hasParams(int a) {

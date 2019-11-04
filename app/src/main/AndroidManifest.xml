@@ -4,8 +4,12 @@
     package="com.example.mystudy">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
+        android:name=".ui.App"
         android:allowBackup="true"
         android:appComponentFactory="a"
         android:icon="@mipmap/ic_launcher"
@@ -13,9 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".ui.App"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".ui.AopActivity2">
+        <activity android:name=".audio.PcmActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -23,11 +26,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.WeatherActivity">
+        <activity android:name=".ui.AopActivity2">
 
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".ui.AopActivity"/>
-        <activity android:name=".ui.ShadowActivity"></activity>
+        <activity android:name=".ui.WeatherActivity" />
+        <activity android:name=".ui.AopActivity" />
+        <activity android:name=".ui.ShadowActivity" />
         <activity android:name=".mvvm.NavigationActivity" />
         <activity android:name=".mvvm.LifecycleActivity" />
         <activity android:name=".ui.RvActivity" />
@@ -39,8 +50,7 @@
             android:launchMode="singleTask" />
         <activity android:name=".ui.LoadPluginActivity" />
         <activity android:name=".ui.VpIndicatorActivity" />
-        <activity android:name=".ui.MainActivity" />
-        <!--<activity android:name=".ui.AopActivity" />-->
+        <activity android:name=".ui.MainActivity" /> <!-- <activity android:name=".ui.AopActivity" /> -->
         <activity android:name="com.example.dnbus.plugin.ProxyActivity" />
 
         <service android:name=".aidl.MyService" />

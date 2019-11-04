@@ -61,7 +61,6 @@ class AopActivity : AppCompatActivity() {
         Log.e(TAG,"聊天花费了$duration")
     }
 
-
     fun noParam(){
         startActivity(Intent(this, FragmentActivity::class.java))
         Log.e(TAG,"这是noParam的方法")
@@ -105,6 +104,10 @@ class AopActivity : AppCompatActivity() {
             NetType.NET_UNKNOWN -> {
                 Log.e(TAG, "onNetChange->NET_UNKNOWN")
                 Toast.makeText(this, "变化了-未知", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                Log.e(TAG, "onNetChange->NET_ALL")
+                Toast.makeText(this, "变化了-ALL", Toast.LENGTH_SHORT).show()
             }
         }
     }
