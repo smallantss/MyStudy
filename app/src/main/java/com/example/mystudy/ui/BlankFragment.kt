@@ -26,22 +26,54 @@ class BlankFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
         }
+        Log.e(TAG,"onCreatestate->"+lifecycle.currentState)
     }
 
     override fun onDetach() {
         NetCheckUtils2.getInstance().unregister(this)
+        Log.e(TAG,"onDetachstate->"+lifecycle.currentState)
         super.onDetach()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.e(TAG,"onDestroyViewstate->"+lifecycle.currentState)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e(TAG,"onDestroystate->"+lifecycle.currentState)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        Log.e(TAG,"onCreateView")
+        Log.e(TAG,"onCreateViewstate->"+lifecycle.currentState)
         return inflater.inflate(R.layout.fragment_blank, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.e(TAG,"onViewCreated")
+        Log.e(TAG,"onViewCreatedstate->"+lifecycle.currentState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e(TAG,"onStartstate->"+lifecycle.currentState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e(TAG,"onResumestate->"+lifecycle.currentState)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e(TAG,"onPausestate->"+lifecycle.currentState)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e(TAG,"onStopstate->"+lifecycle.currentState)
     }
 
     fun setData(s:String){

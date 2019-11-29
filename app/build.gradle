@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
-
 import org.aspectj.bridge.IMessage
 import org.aspectj.bridge.MessageHandler
 import org.aspectj.tools.ajc.Main
@@ -25,6 +24,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+//        ndk {
+//            moduleName "ndktest-jni"
+//            abiFilters "armeabi-v7a", "x86"
+//        }
 
         javaCompileOptions {
 
@@ -43,6 +47,15 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+//        externalNativeBuild {
+//            ndkBuild {
+//                path 'src/main/jni/Android.mk'
+//            }
+//        }
+//        sourceSets.main {
+//            jni.srcDirs = []
+//            jniLibs.srcDirs = ['src/main/jniLibs']
+//        }
     }
 }
 dependencies {
@@ -55,11 +68,10 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation project(':dnbus')
+    //    implementation project(':dnbus')
     implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.8'
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-
     def paging_version = "2.1.0"
     def lifecycle_version = "2.0.0"
     // ViewModel and LiveData
@@ -68,18 +80,27 @@ dependencies {
     implementation "androidx.paging:paging-runtime:$paging_version"
     // alternatively - without Android dependencies for testing  For Kotlin use paging-common-ktx
     testImplementation "androidx.paging:paging-common:$paging_version"
-
     def nav_version = "2.0.0"
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
     def work_version = "2.2.0"
     // Kotlin + coroutines
     implementation "androidx.work:work-runtime-ktx:$work_version"
     implementation 'org.aspectj:aspectjrt:1.8.9'
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation files('libs/fmod.jar')
+    implementation 'com.squareup.retrofit2:retrofit:2.6.2'
+    implementation 'com.alibaba:fastjson:1.2.62'
+    annotationProcessor project(path: ':butterknife_compiler')
+    implementation project(path: ':butterknife_annotations')
+    implementation project(path: ':butterknife')
 }
+
+//configurations {
+//    //这里要排除到这个包，这个包会与 com.google.guava 冲突，导致编译不过
+//    all*.exclude group: 'com.google.guava', module: 'listenablefuture'
+//}
 
 repositories {
     mavenCentral()

@@ -11,6 +11,8 @@ import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -151,21 +153,32 @@ public class NetCheckUtils2 {
     };
 
     private void onNetChange(NetType netType) {
-        try {
-            Set<Object> keySet = netObserverList.keySet();
-            for (Object object : keySet) {
-                List<AnnotationMethod> methodList = netObserverList.get(object);
-                if (methodList != null) {
-                    for (AnnotationMethod annoMethod : methodList) {
-                        NetType methodNet = annoMethod.netChange.netType();
-                        if ( methodNet == NetType.NET_ALL || methodNet == netType) {
-                            annoMethod.method.invoke(object, netType);
-                        }
+        Set<Object> keySet = netObserverList.keySet();
+        for (Object object : keySet) {
+            if (object instanceof LifecycleOwner) {
+                LifecycleOwner lifecycleOwner = (LifecycleOwner) object;
+                if (lifecycleOwner.getLifecycle().getCurrentState().isAtLeast(Lifecycle.State.STARTED)){
+                    execute(object, netType);
+                }
+            } else {
+                execute(object, netType);
+            }
+        }
+    }
+
+    private void execute(Object object, NetType netType) {
+        List<AnnotationMethod> methodList = netObserverList.get(object);
+        if (methodList != null) {
+            for (AnnotationMethod annoMethod : methodList) {
+                NetType methodNet = annoMethod.netChange.netType();
+                if (methodNet == NetType.NET_ALL || methodNet == netType) {
+                    try {
+                        annoMethod.method.invoke(object, netType);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

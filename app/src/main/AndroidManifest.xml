@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".ui.App"
@@ -18,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".audio.PcmActivity">
+        <activity android:name=".ui.ButterKnifeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -26,6 +27,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.SkinActivity" />
+        <activity android:name=".ui.NdkActivity">
+
+        </activity>
+        <activity android:name=".audio.PcmActivity" />
         <activity android:name=".ui.AopActivity2">
 
             <!-- <intent-filter> -->
@@ -36,7 +42,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".ui.WeatherActivity" />
+        <activity android:name=".ui.WeatherActivity"></activity>
         <activity android:name=".ui.AopActivity" />
         <activity android:name=".ui.ShadowActivity" />
         <activity android:name=".mvvm.NavigationActivity" />

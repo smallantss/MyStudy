@@ -3,11 +3,14 @@ package com.example.mystudy;
 import com.example.mystudy.aop.CheckNet;
 import com.example.mystudy.aop.NetType;
 
-import java.lang.reflect.Method;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class Test2 {
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 //        String s = new String("我");
 //        testString(s);
 //        System.out.println(s);
@@ -19,44 +22,101 @@ public class Test2 {
 //        testObj(p);
 //        System.out.println(p.name);
 
+//        Method[] methods = Test2.class.getDeclaredMethods();
+//        for (Method method : methods) {
+//            method.setAccessible(true);
+//            Class<?>[] parameterTypes = method.getParameterTypes();
+//            System.out.println("方法名:"+method.getName()+"------------");
+//            for (Class<?> parameterType : parameterTypes) {
+//                String paramName = parameterType.getName();
+//                if (parameterType.equals(boolean.class)){
+//                    System.out.println(paramName);
+//                }
+//            }
+//        }
 
-        Method[] methods = Test2.class.getDeclaredMethods();
-        for (Method method : methods) {
-            method.setAccessible(true);
-            Class<?>[] parameterTypes = method.getParameterTypes();
-            System.out.println("方法名:"+method.getName()+"------------");
-            for (Class<?> parameterType : parameterTypes) {
-                String paramName = parameterType.getName();
-                if (parameterType.equals(boolean.class)){
-                    System.out.println(paramName);
-                }
+
+//        System.out.println("start");
+//        Observable.empty().subscribe(new Consumer<Object>() {
+//            @Override
+//            public void accept(Object o) throws Exception {
+//                System.out.println("accept");
+//            }
+//        });
+
+//        try {
+//            OkHttpClient client = new OkHttpClient();
+//            Request request = new Request.Builder().url("https://www.wanandroid.com/wxarticle/chapters/json").build();
+//            Response response = client.newCall(request).execute();
+//            System.out.println(response.body().string());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+
+
+        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 3, 5, TimeUnit.SECONDS, new ArrayBlockingQueue<>(3), new RejectedExecutionHandler() {
+            @Override
+            public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+
             }
+        });
+        for (int i = 0; i < 10; i++) {
+            int index = i;
+            Runnable runnable = new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.currentThread().setName("thread----" + index);
+                        Thread.sleep(5000);
+                        System.out.println(Thread.currentThread().getName());
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            };
+            executor.execute(runnable);
         }
-
+//        for (int i = 5; i < 10; i++) {
+//            int index = i;
+//            Runnable runnable = new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        Thread.currentThread().setName("thread----" + index);
+//                        Thread.sleep(5000);
+//                        System.out.println(Thread.currentThread().getName());
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            };
+//            executor.execute(runnable);
+//        }
     }
+
 
     @CheckNet
-    public void testAnnotation(int a, String b, NetType netType){
+    public void testAnnotation(int a, String b, NetType netType) {
 
     }
 
-    private void testBool(boolean b){
+    private void testBool(boolean b) {
 
     }
 
-    private static void testString(String s){
-        s="真帅";
+    private static void testString(String s) {
+        s = "真帅";
     }
 
-    private static void testInt(int s){
+    private static void testInt(int s) {
         s++;
     }
 
-    private static void testObj(Person p){
+    private static void testObj(Person p) {
         p.name = "aaa";
     }
 }
 
-class Person{
+class Person {
     String name;
 }

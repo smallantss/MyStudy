@@ -2,6 +2,7 @@ package com.example.mystudy.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -17,11 +18,40 @@ class AopActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aop)
-        NetCheckUtils2.getInstance().register(this);
+        NetCheckUtils2.getInstance().register(this)
+        Log.e(TAG,"onCreatestate->"+lifecycle.currentState)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e(TAG,"onStartstate->"+lifecycle.currentState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Handler().post {
+            Log.e(TAG,"onResumestate->"+lifecycle.currentState)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e(TAG,"onPausestate->"+lifecycle.currentState)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e(TAG,"onStopstate->"+lifecycle.currentState)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.e(TAG,"onRestartstate->"+lifecycle.currentState)
     }
 
     override fun onDestroy() {
         NetCheckUtils2.getInstance().unregister(this);
+        Log.e(TAG,"onDestroystate->"+lifecycle.currentState)
         super.onDestroy()
     }
 
@@ -34,6 +64,7 @@ class AopActivity : AppCompatActivity() {
                 noParam()
             }
             R.id.btnParams->{
+                Log.e(TAG,"onClickstate->"+lifecycle.currentState)
                 hasParams(1)
             }
             R.id.annoNoParams->{
