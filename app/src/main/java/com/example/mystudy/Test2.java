@@ -3,14 +3,44 @@ package com.example.mystudy;
 import com.example.mystudy.aop.CheckNet;
 import com.example.mystudy.aop.NetType;
 
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.RejectedExecutionHandler;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
-
 public class Test2 {
 
+    int a =1;
+    int b =2;
+
+    private void change(){
+        b = 33333;
+        a = b;
+    }
+
+    private void print(){
+        System.out.println("a = "+a+" b = "+b);
+    }
+
+    static class MyRun implements Runnable{
+        private boolean flag = false;
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(200);
+                flag = true;
+                System.out.println("flag = "+flag);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        public boolean isFlag(){
+            return flag;
+        }
+    }
+
     public static void main(String[] args) {
+
+    new Thread(new MyRun()).start();
+
+
 //        String s = new String("我");
 //        testString(s);
 //        System.out.println(s);
@@ -54,28 +84,31 @@ public class Test2 {
 //        }
 
 
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 3, 5, TimeUnit.SECONDS, new ArrayBlockingQueue<>(3), new RejectedExecutionHandler() {
-            @Override
-            public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+//        ThreadPoolExecutor executor = new ThreadPoolExecutor(2, 3, 5, TimeUnit.SECONDS, new ArrayBlockingQueue<>(3), new RejectedExecutionHandler() {
+//            @Override
+//            public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+//
+//            }
+//        });
+//        for (int i = 0; i < 10; i++) {
+//            int index = i;
+//            Runnable runnable = new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        Thread.currentThread().setName("thread----" + index);
+//                        Thread.sleep(5000);
+//                        System.out.println(Thread.currentThread().getName());
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            };
+//            executor.execute(runnable);
+//        }
 
-            }
-        });
-        for (int i = 0; i < 10; i++) {
-            int index = i;
-            Runnable runnable = new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.currentThread().setName("thread----" + index);
-                        Thread.sleep(5000);
-                        System.out.println(Thread.currentThread().getName());
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            };
-            executor.execute(runnable);
-        }
+
+
 //        for (int i = 5; i < 10; i++) {
 //            int index = i;
 //            Runnable runnable = new Runnable() {

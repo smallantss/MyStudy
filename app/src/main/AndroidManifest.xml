@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".ui.ButterKnifeActivity">
+        <activity android:name=".ui.BuilderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -27,10 +27,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.SkinActivity" />
-        <activity android:name=".ui.NdkActivity">
-
+        <activity android:name=".ui.ButterKnifeActivity">
         </activity>
+        <activity android:name=".ui.SkinActivity" />
+        <activity android:name=".ui.NdkActivity"></activity>
         <activity android:name=".audio.PcmActivity" />
         <activity android:name=".ui.AopActivity2">
 
@@ -42,7 +42,7 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".ui.WeatherActivity"></activity>
+        <activity android:name=".ui.WeatherActivity" />
         <activity android:name=".ui.AopActivity" />
         <activity android:name=".ui.ShadowActivity" />
         <activity android:name=".mvvm.NavigationActivity" />
