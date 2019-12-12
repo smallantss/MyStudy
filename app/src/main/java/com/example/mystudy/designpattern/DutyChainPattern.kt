@@ -1,7 +1,5 @@
 package com.example.mystudy.designpattern
 
-import java.util.concurrent.locks.Condition
-
 /**
  * 责任链模式
  */
@@ -12,7 +10,17 @@ class DutyChainPattern {
         fun main(args: Array<String>) {
 //            handle1()
 //            handle2()
-            handle3()
+//            handle3()
+
+            val wxHandler = WXHandler()
+            val qqHandler = QQHandler()
+            val otherHandler = OtherHandler()
+            wxHandler.nextHandler = qqHandler
+            qqHandler.nextHandler = otherHandler
+            wxHandler.handle(500)
+            wxHandler.handle(1500)
+            wxHandler.handle(2500)
+            wxHandler.handle(5500)
 
         }
 
@@ -27,9 +35,9 @@ class DutyChainPattern {
 
         private fun handle2() {
             //3个处理者
-            val handler1  = Handler1()
-            val handler2  = Handler2()
-            val handler3  = Handler3()
+            val handler1 = Handler1()
+            val handler2 = Handler2()
+            val handler3 = Handler3()
             //设置当前节点的下一个处理对象
             handler1.mNextHandler = handler2
             handler2.mNextHandler = handler3
@@ -51,29 +59,32 @@ class DutyChainPattern {
     }
 }
 
-abstract class Handler{
+abstract class Handler {
     //下一个节点的处理对象
-    lateinit var nextProcessor:Handler
+    lateinit var nextProcessor: Handler
+
     //处理请求
-    abstract fun handleRequest(condition:String)
+    abstract fun handleRequest(condition: String)
 }
+
 //具体的处理对象1
-class ConcreteHandler1: Handler() {
+class ConcreteHandler1 : Handler() {
     //处理请求的条件
     override fun handleRequest(condition: String) {
-        if (condition=="1"){
+        if (condition == "1") {
             println("ConcreteHandler1 处理了")
-        }else{
+        } else {
             nextProcessor.handleRequest(condition)
         }
     }
 }
+
 //具体的处理对象2
-class ConcreteHandler2: Handler() {
+class ConcreteHandler2 : Handler() {
     override fun handleRequest(condition: String) {
-        if (condition=="2"){
+        if (condition == "2") {
             println("ConcreteHandler2 处理了")
-        }else{
+        } else {
             println("没人能处理了")
 //            nextProcessor.handleRequest(condition)
         }
@@ -83,70 +94,83 @@ class ConcreteHandler2: Handler() {
 /*************************************************/
 
 //抽象的处理者
-abstract class AbstractHandler{
+abstract class AbstractHandler {
     //下一个处理者
-    var mNextHandler:AbstractHandler?=null
+    var mNextHandler: AbstractHandler? = null
+
     //获取处理等级
-    abstract fun getHandlerLevel():Int
+    abstract fun getHandlerLevel(): Int
+
     //每个处理者具体的处理方式
     abstract fun handle(request: AbstractRequest)
+
     //处理请求的逻辑
-    fun handleRequest(request:AbstractRequest){
+    fun handleRequest(request: AbstractRequest) {
         //判断等级匹配
-        if (getHandlerLevel()==request.getRequestLevel()){
+        if (getHandlerLevel() == request.getRequestLevel()) {
             //具体的处理逻辑
             handle(request)
-        }else{
-            if (mNextHandler!=null){
+        } else {
+            if (mNextHandler != null) {
                 mNextHandler!!.handleRequest(request)
-            }else{
+            } else {
                 println("找不到处理者")
             }
         }
     }
 }
+
 //抽象的请求者
-abstract class AbstractRequest(var any:Any){
+abstract class AbstractRequest(var any: Any) {
     //获取请求级别
-    abstract fun getRequestLevel():Int
+    abstract fun getRequestLevel(): Int
 }
+
 //具体的请求者
-class Request1:AbstractRequest("Request1"){
+class Request1 : AbstractRequest("Request1") {
     override fun getRequestLevel(): Int {
         return 1
     }
 }
-class Request2:AbstractRequest("Request2"){
+
+class Request2 : AbstractRequest("Request2") {
     override fun getRequestLevel(): Int {
         return 2
     }
 }
-class Request3:AbstractRequest("Request3"){
+
+class Request3 : AbstractRequest("Request3") {
     override fun getRequestLevel(): Int {
         return 3
     }
 }
+
 //具体的处理者
-class Handler1: AbstractHandler() {
+class Handler1 : AbstractHandler() {
     override fun getHandlerLevel(): Int {
         return 1
     }
+
     override fun handle(request: AbstractRequest) {
         println("Handler1处理了请求等级为:${request.getRequestLevel()}的请求")
     }
 }
-class Handler2: AbstractHandler() {
+
+class Handler2 : AbstractHandler() {
     override fun getHandlerLevel(): Int {
         return 2
     }
+
     override fun handle(request: AbstractRequest) {
         println("Handler2处理了请求等级为:${request.getRequestLevel()}的请求")
     }
 }
-class Handler3: AbstractHandler() {
+
+class Handler3 : AbstractHandler() {
     override fun getHandlerLevel(): Int {
         return 3
     }
+
     override fun handle(request: AbstractRequest) {
         println("Handler3处理了请求等级为:${request.getRequestLevel()}的请求")
     }
@@ -154,27 +178,30 @@ class Handler3: AbstractHandler() {
 
 /*****************************************************/
 //领导处理保报销
-abstract class Leader{
+abstract class Leader {
     //报销金额上限
-    abstract fun getLimit():Int
+    abstract fun getLimit(): Int
+
     //处理报销
-    abstract fun handle(money:Int)
+    abstract fun handle(money: Int)
+
     //上一级领导
-    var nextLeader:Leader?=null
-    fun handleMoney(money:Int){
-        if (getLimit()<money){
-            if (nextLeader==null){
+    var nextLeader: Leader? = null
+
+    fun handleMoney(money: Int) {
+        if (getLimit() < money) {
+            if (nextLeader == null) {
                 println("处理不了：$money 元")
-            }else{
+            } else {
                 nextLeader!!.handleMoney(money)
             }
-        }else{
+        } else {
             handle(money)
         }
     }
 }
 
-class GroupLeader:Leader(){
+class GroupLeader : Leader() {
     override fun getLimit(): Int {
         return 1000
     }
@@ -183,7 +210,8 @@ class GroupLeader:Leader(){
         println("小组领导处理：$money 元")
     }
 }
-class DepartLeader:Leader(){
+
+class DepartLeader : Leader() {
     override fun getLimit(): Int {
         return 5000
     }
@@ -192,7 +220,8 @@ class DepartLeader:Leader(){
         println("部门领导处理：$money 元")
     }
 }
-class BossLeader:Leader(){
+
+class BossLeader : Leader() {
     override fun getLimit(): Int {
         return 8000
     }
@@ -202,3 +231,41 @@ class BossLeader:Leader(){
     }
 }
 
+/***************************************************************/
+interface IHandler{
+    fun handle(num: Int)
+}
+//基类,都可以处理请求
+abstract class AbsHandler:IHandler {
+    lateinit var nextHandler: AbsHandler
+}
+//WX处理
+class WXHandler : AbsHandler(){
+    override fun handle(num: Int) {
+        if (num>1000){
+            nextHandler.handle(num)
+        }else{
+            System.out.println("WXHandler:$num")
+        }
+    }
+}
+
+class QQHandler : AbsHandler(){
+    override fun handle(num: Int) {
+        if (num>2000){
+            nextHandler.handle(num)
+        }else{
+            System.out.println("QQHandler:$num")
+        }
+    }
+}
+
+class OtherHandler : AbsHandler(){
+    override fun handle(num:Int) {
+        if (num>5000){
+            System.out.println("reject:$num")
+        }else{
+            System.out.println("OtherHandler:$num")
+        }
+    }
+}

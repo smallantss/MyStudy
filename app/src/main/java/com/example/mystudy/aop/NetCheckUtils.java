@@ -127,7 +127,7 @@ public class NetCheckUtils {
         return connectivityManager.getActiveNetworkInfo();
     }
 
-    private boolean isConnected(@NonNull Context context) {
+    public boolean isConnected(@NonNull Context context) {
         NetworkInfo networkInfo;
         try {
             networkInfo = getNetInfo(context);

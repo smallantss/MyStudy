@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".ui.App"
@@ -19,6 +20,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
+        <activity android:name=".ui.HttpCacheActivity"></activity>
         <activity android:name=".ui.BuilderActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,8 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ButterKnifeActivity">
-        </activity>
+        <activity android:name=".ui.ButterKnifeActivity"></activity>
         <activity android:name=".ui.SkinActivity" />
         <activity android:name=".ui.NdkActivity"></activity>
         <activity android:name=".audio.PcmActivity" />

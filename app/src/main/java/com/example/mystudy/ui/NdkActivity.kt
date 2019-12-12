@@ -19,7 +19,7 @@ class NdkActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ndk)
         val jni = JNI()
         btn1.setOnClickListener {
-            tv.text = jni.helloFromNdk()
+//            tv.text = jni.helloFromNdk()
             RxPermissions(this)
                     .request(Manifest.permission.CAMERA)
                     .subscribe {
