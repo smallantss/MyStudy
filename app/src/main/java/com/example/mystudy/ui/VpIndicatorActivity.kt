@@ -106,11 +106,11 @@ class VpIndicatorActivity : AppCompatActivity() {
                 vie.getLocationInWindow(vieL)
                 distance = view2L[0] - view1L[0]
                 dis2 = viewL[0] - vieL[0]
-    //                L("view1->${view1L[0]}")
-    //                L("view2->${view2.width}")
-    //                L("distance-> $distance")
-    //                L("view-> ${viewL[0]},${viewL[1]}")
-    //                L("vie-> ${vieL[0]},${vieL[1]}")
+    //                LogUtils("view1->${view1L[0]}")
+    //                LogUtils("view2->${view2.width}")
+    //                LogUtils("distance-> $distance")
+    //                LogUtils("view-> ${viewL[0]},${viewL[1]}")
+    //                LogUtils("vie-> ${vieL[0]},${vieL[1]}")
                 if (posOffset != 0f && isDrag) {
 
                     if (posOffset > preOffset) {

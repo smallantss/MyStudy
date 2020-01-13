@@ -3,7 +3,7 @@ package com.example.mystudy.widgets
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
-import com.example.mystudy.utils.L
+import com.example.mystudy.utils.LogUtils
 
 class FlowLayout2 @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -95,6 +95,6 @@ class FlowLayout2 @JvmOverloads constructor(
     }
 
     fun l(s:String){
-        L.e("FlowLayout",s)
+        LogUtils.e("FlowLayout",s)
     }
 }

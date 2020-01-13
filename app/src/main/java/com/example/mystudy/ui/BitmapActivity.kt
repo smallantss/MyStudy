@@ -10,7 +10,7 @@ import android.view.animation.AccelerateInterpolator
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mystudy.R
-import com.example.mystudy.utils.L
+import com.example.mystudy.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_bitmap.*
 
 class BitmapActivity : AppCompatActivity() {
@@ -83,12 +83,12 @@ class CircleView2 @JvmOverloads constructor(
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        L.e("onMeasure", "CircleView2")
+        LogUtils.e("onMeasure", "CircleView2")
     }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        L.e("onSizeChanged", "CircleView2")
+        LogUtils.e("onSizeChanged", "CircleView2")
         mW = w
         mH = h
         //创建一个空白的Bitmap
@@ -101,16 +101,16 @@ class CircleView2 @JvmOverloads constructor(
 
     override fun onFinishInflate() {
         super.onFinishInflate()
-        L.e("onFinishInflate", "CircleView2")
+        LogUtils.e("onFinishInflate", "CircleView2")
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        L.e("onAttachedToWindow", "CircleView2")
+        LogUtils.e("onAttachedToWindow", "CircleView2")
     }
 
     override fun onDraw(canvas: Canvas?) {
-        L.e("onDraw", "CircleView2")
+        LogUtils.e("onDraw", "CircleView2")
         //目标区域 将bitmap绘制在屏幕的什么地方，这里是绘制到左上角，宽高为控件的一半
         val desc = RectF(10f, 10f, width.toFloat(), height.toFloat())
         //在这个以空白Bitmap为底的Canvas上再画一个srcBitmap
@@ -122,14 +122,14 @@ class CircleView2 @JvmOverloads constructor(
     }
 
     fun changeSrc() {
-        L.e("changeSrc", "aaa")
+        LogUtils.e("changeSrc", "aaa")
         val valueAnimator = ValueAnimator.ofFloat(1f, 0f)
         valueAnimator.duration = 200
         valueAnimator.interpolator = AccelerateInterpolator()
         valueAnimator.addUpdateListener {
             // 不断重新计算上下左右位置
             val fraction = it.animatedValue as Float
-            L.e("changeSrc", "$fraction")
+            LogUtils.e("changeSrc", "$fraction")
             src.right = ((fraction * width).toInt())
             // 重绘
             postInvalidate()

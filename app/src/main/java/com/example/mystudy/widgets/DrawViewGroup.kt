@@ -9,7 +9,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.FrameLayout
 import com.example.mystudy.R
-import com.example.mystudy.utils.L
+import com.example.mystudy.utils.LogUtils
 import kotlinx.android.synthetic.main.layout_move.view.*
 
 const val TAG = "DrawViewGroup"
@@ -92,12 +92,12 @@ class DrawViewGroup @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas?) {
-        L.e(TAG, "onDraw")
+        LogUtils.e(TAG, "onDraw")
         super.onDraw(canvas)
     }
 
     override fun dispatchDraw(canvas: Canvas?) {
-        L.e(TAG, "dispatchDraw")
+        LogUtils.e(TAG, "dispatchDraw")
         super.dispatchDraw(canvas)
         canvas?.apply {
             mCanvas = this

@@ -10,7 +10,7 @@ import android.util.AttributeSet
 import android.view.View
 import com.example.mystudy.BuildConfig
 import com.example.mystudy.R
-import com.example.mystudy.utils.L
+import com.example.mystudy.utils.LogUtils
 
 /**
  * 带阴影的View
@@ -39,7 +39,7 @@ class ShadowView @JvmOverloads constructor(
             mShadowRadius = getDimensionPixelSize(R.styleable.ShadowView_shadowRadius, 10)
             mRadius = getDimensionPixelSize(R.styleable.ShadowView_radius, 0)
             mShadowColor = getColor(R.styleable.ShadowView_shadowColor, Color.BLACK)
-            L.e("mDx->$mDx,mDy->$mDy,mShadowRadius->$mShadowRadius,mRadius->$mRadius")
+            LogUtils.e("mDx->$mDx,mDy->$mDy,mShadowRadius->$mShadowRadius,mRadius->$mRadius")
             rect.set(mShadowRadius.toFloat(), mShadowRadius.toFloat(), (width - mShadowRadius).toFloat(), (height - mShadowRadius).toFloat())
             recycle()
         }

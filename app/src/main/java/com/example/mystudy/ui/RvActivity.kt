@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mystudy.R
-import com.example.mystudy.utils.L
+import com.example.mystudy.utils.LogUtils
 import com.example.mystudy.widgets.CustomLayoutManager3
 import kotlinx.android.synthetic.main.activity_rv.*
 import java.util.*
@@ -93,7 +93,7 @@ class RvAdapter(val datas:List<String>): RecyclerView.Adapter<RvHolder>() {
     var i = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RvHolder {
-        L.e("RvAdapter","onCreateViewHolder->${i++}")
+        LogUtils.e("RvAdapter","onCreateViewHolder->${i++}")
         val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_item, parent,false)
         return RvHolder(view)
     }
@@ -104,7 +104,7 @@ class RvAdapter(val datas:List<String>): RecyclerView.Adapter<RvHolder>() {
 
     var j = 1
     override fun onBindViewHolder(holder: RvHolder, position: Int) {
-        L.e("RvAdapter","onBindViewHolder->${j++}")
+        LogUtils.e("RvAdapter","onBindViewHolder->${j++}")
         (holder.itemView as TextView).apply {
             text = datas[position]
             when(position%3){

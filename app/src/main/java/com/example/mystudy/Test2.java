@@ -42,21 +42,22 @@ public class Test2 {
     }
 
     public static void main(String[] args) {
-
-        int sum = 100;
-        int count = 15;
-        //根据线程数计算每个线程需要下载多少
-        for (int i = 0; i < count; i++) {
-            int part = sum / count;
-            int start = i * part;
-            int end = start;
-            if (i == count-1) {
-                end = sum;
-            } else {
-                end = start + part;
-            }
-            System.out.println("第"+i+"下载 start->"+start+",end->"+end);
-        }
+        Person person = new Man();
+        person.eat();
+//        int sum = 100;
+//        int count = 15;
+//        //根据线程数计算每个线程需要下载多少
+//        for (int i = 0; i < count; i++) {
+//            int part = sum / count;
+//            int start = i * part;
+//            int end = start;
+//            if (i == count-1) {
+//                end = sum;
+//            } else {
+//                end = start + part;
+//            }
+//            System.out.println("第"+i+"下载 start->"+start+",end->"+end);
+//        }
 
 
 //        new Thread(new MyRun()).start();
@@ -171,4 +172,16 @@ public class Test2 {
 
 class Person {
     String name;
+
+    public void eat(){
+        System.out.println("Person eat");
+    }
+}
+
+class Man extends Person{
+
+    @Override
+    public void eat() {
+        System.out.println("Man eat");
+    }
 }
