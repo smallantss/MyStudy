@@ -21,6 +21,14 @@
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
         <activity android:name=".ui.GlideActivity">
+
+        </activity>
+        <activity android:name=".event.TouchActivity"></activity>
+        <activity android:name=".ui.HttpCacheActivity" />
+        <activity android:name=".ui.BuilderActivity" />
+        <activity android:name=".ui.ButterKnifeActivity" />
+        <activity android:name=".ui.SkinActivity" />
+        <activity android:name=".ui.NdkActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -28,12 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".event.TouchActivity"></activity>
-        <activity android:name=".ui.HttpCacheActivity" />
-        <activity android:name=".ui.BuilderActivity" />
-        <activity android:name=".ui.ButterKnifeActivity" />
-        <activity android:name=".ui.SkinActivity" />
-        <activity android:name=".ui.NdkActivity" />
         <activity android:name=".audio.PcmActivity" />
         <activity android:name=".ui.AopActivity2">
 
@@ -47,7 +49,9 @@
         </activity>
         <activity android:name=".ui.WeatherActivity" />
         <activity android:name=".ui.AopActivity" />
-        <activity android:name=".ui.ShadowActivity" />
+        <activity android:name=".ui.ShadowActivity">
+
+        </activity>
         <activity android:name=".mvvm.NavigationActivity" />
         <activity android:name=".mvvm.LifecycleActivity" />
         <activity android:name=".ui.RvActivity" />

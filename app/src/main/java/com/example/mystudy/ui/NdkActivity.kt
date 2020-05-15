@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mystudy.R
 import com.example.mystudy.ndk.JNI
-import com.example.mystudy.rx.permissions.RxPermissions
+import com.example.ypermission.PermissionManager
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_ndk.*
@@ -19,16 +19,23 @@ class NdkActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ndk)
         val jni = JNI()
         btn1.setOnClickListener {
-//            tv.text = jni.helloFromNdk()
-            RxPermissions(this)
-                    .request(Manifest.permission.CAMERA)
-                    .subscribe {
-                        if (it) {
-                            Toast.makeText(this, "同意", Toast.LENGTH_LONG).show()
-                        } else {
-                            Toast.makeText(this, "不同意", Toast.LENGTH_LONG).show()
+            //            tv.text = jni.helloFromNdk()
+            val p = arrayOf(
+                    Manifest.permission.CAMERA,
+                    Manifest.permission.RECORD_AUDIO,
+                    Manifest.permission.READ_EXTERNAL_STORAGE,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            PermissionManager
+                    .requestPermission(this, p, object : PermissionManager.PermissionsListener() {
+                        override fun onPermissionGranted() {
+                            Toast.makeText(this@NdkActivity, "permissionGranted", Toast.LENGTH_SHORT).show()
                         }
-                    }
+
+                        override fun onPermissionDenied(noPermissionsList: MutableList<PermissionManager.NoPermission>) {
+                            super.onPermissionDenied(noPermissionsList)
+                            Toast.makeText(this@NdkActivity, "permissionDenied", Toast.LENGTH_SHORT).show()
+                        }
+                    })
         }
 
         Observable.create<String> {
@@ -42,6 +49,7 @@ class NdkActivity : AppCompatActivity() {
         publishSubject.subscribe {
             tv.text = it
         }
+
         var i = 0
         btn2.setOnClickListener {
             i++
@@ -50,12 +58,12 @@ class NdkActivity : AppCompatActivity() {
 
         btn3.setOnClickListener {
             val list = ArrayList<Observable<String>>()
-            for (j in 0 until 5){
+            for (j in 0 until 5) {
                 list.add(Observable.just(j.toString()))
             }
-            val observable= Observable.concat(list)
+            val observable = Observable.concat(list)
             observable.subscribe {
-                Log.e("TAG",it)
+                Log.e("TAG", it)
             }
         }
 
