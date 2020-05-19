@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FAFAFA"
     tools:context=".ui.ShadowActivity">
+
+    <com.example.mystudy.widgets.ShadowLayout
+        android:layout_margin="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="100dp"
+        android:layout_height="100dp">
+        <!--<View-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@android:color/black"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"/>-->
+    </com.example.mystudy.widgets.ShadowLayout>
 
     <com.example.mystudy.widgets.ShadowView
         android:layout_width="100dp"
@@ -12,12 +26,9 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:radius="8dp"
-        app:shadowDx="0dp"
-        app:shadowDy="8dp"
+        app:radius="10dp"
         app:shadowRadius="10dp"
-        android:background="@color/colorAccent"
-        app:shadowColor="@color/colorPrimaryDark"
+        app:shadowColor="@android:color/holo_red_dark"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
