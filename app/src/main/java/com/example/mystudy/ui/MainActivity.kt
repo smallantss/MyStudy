@@ -1,17 +1,19 @@
 package com.example.mystudy.ui
 
+//import com.example.dnbus.DnBus
+//import com.example.dnbus.Subscribe
+//import com.example.dnbus.ThreadMode
 import android.animation.ObjectAnimator
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import com.example.dnbus.DnBus
-import com.example.dnbus.Subscribe
-import com.example.dnbus.ThreadMode
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mystudy.R
 import com.example.mystudy.utils.ScreenDensityUtils
 import kotlinx.android.synthetic.main.activity_main.*
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         ScreenDensityUtils.initData(this,application)
 
-        DnBus.getInstance().register(this)
+//        DnBus.getInstance().register(this)
 
         ObjectAnimator.ofFloat(tv,"translationX",0f,10f,100f)
                 .setDuration(200)
@@ -30,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onClick(view:View){
-        DnBus.getInstance().post("aaaaa")
+//        DnBus.getInstance().post("aaaaa")
         startActivity(Intent(this, MyIntentService::class.java))
     }
 

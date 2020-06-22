@@ -1,11 +1,11 @@
 package com.example.mystudy.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mystudy.R
 
 class FragmentActivity : AppCompatActivity() {
@@ -62,19 +62,19 @@ class FragmentActivity : AppCompatActivity() {
         hideAll()
         when(v.id){
             R.id.button0 ->{
-                startActivity(Intent(this, AopActivity::class.java))
-//                if (fm0==null){
-//                    fm0 = BlankFragment.newInstance("这是第一个")
-//                }
-//                if (fm0!!.isAdded){
-//                    supportFragmentManager.beginTransaction().show(fm0!!)
-//                            .commitNowAllowingStateLoss()
-//                }else{
-//                    supportFragmentManager.beginTransaction().add(R.id.frameLayout,fm0!!)
-//                            .show(fm0!!)
-//                            .commitNowAllowingStateLoss()
-//                }
-//                fm0!!.setData("改变了0")
+//                startActivity(Intent(this, AopActivity::class.java))
+                if (fm0==null){
+                    fm0 = BlankFragment.newInstance("这是第0个")
+                }
+                if (fm0!!.isAdded){
+                    supportFragmentManager.beginTransaction().show(fm0!!)
+                            .commitNowAllowingStateLoss()
+                }else{
+                    supportFragmentManager.beginTransaction().add(R.id.frameLayout,fm0!!)
+                            .show(fm0!!)
+                            .commitNowAllowingStateLoss()
+                }
+                fm0!!.setData("改变了0")
 
             }
             R.id.button1 ->{

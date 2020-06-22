@@ -33,6 +33,7 @@ class Snow @JvmOverloads constructor(
     private var posY = 0f
 
     override fun onDraw(canvas: Canvas?) {
+        Log.e("TAG",Thread.currentThread().name)
         val centerX = (width / 2).toFloat()
         val centerY = (height / 2).toFloat()
         canvas?.let {

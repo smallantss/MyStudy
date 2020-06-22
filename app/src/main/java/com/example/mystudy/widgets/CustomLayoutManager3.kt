@@ -1,10 +1,7 @@
 package com.example.mystudy.widgets
 
-import android.graphics.Rect
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
-import com.example.mystudy.utils.L
-import kotlin.math.max
+import com.example.mystudy.utils.LogUtils
 
 /**
  * 实现流式布局
@@ -59,7 +56,7 @@ class CustomLayoutManager3 : RecyclerView.LayoutManager() {
     }
 
     fun l(s:String){
-        L.e("CustomManager3",s)
+        LogUtils.e("CustomManager3",s)
     }
 
     override fun canScrollVertically(): Boolean {

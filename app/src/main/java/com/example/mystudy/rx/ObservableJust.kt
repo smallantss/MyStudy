@@ -9,13 +9,11 @@ class ObservableJust<T>(val item: T) : Observable<T>() {
         sd.run()
     }
 
-
     class ScaleDisposable<T>(val observer: Observer<T>,val item: T){
 
         fun run(){
             try {
                 observer.onNext(item)
-
                 observer.onComplete()
             }catch (e:Exception){
                 e.printStackTrace()

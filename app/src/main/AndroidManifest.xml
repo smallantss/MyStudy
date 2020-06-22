@@ -4,8 +4,14 @@
     package="com.example.mystudy">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".ui.App"
         android:allowBackup="true"
         android:appComponentFactory="a"
         android:icon="@mipmap/ic_launcher"
@@ -14,7 +20,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".ui.WeatherActivity">
+        <activity android:name=".ui.GlideActivity">
+
+        </activity>
+        <activity android:name=".event.TouchActivity"></activity>
+        <activity android:name=".ui.HttpCacheActivity" />
+        <activity android:name=".ui.BuilderActivity" />
+        <activity android:name=".ui.ButterKnifeActivity" />
+        <activity android:name=".ui.SkinActivity" />
+        <activity android:name=".ui.NdkActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -22,23 +36,37 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ShadowActivity">
+        <activity android:name=".audio.PcmActivity" />
+        <activity android:name=".ui.AopActivity2">
+
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+            <!-- <action android:name="android.intent.action.VIEW" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".mvvm.NavigationActivity"></activity>
+        <activity android:name=".ui.WeatherActivity" />
+        <activity android:name=".ui.AopActivity" />
+        <activity android:name=".ui.ShadowActivity">
+
+        </activity>
+        <activity android:name=".mvvm.NavigationActivity" />
         <activity android:name=".mvvm.LifecycleActivity" />
         <activity android:name=".ui.RvActivity" />
         <activity android:name=".ui.DragWordActivity" />
         <activity android:name=".ui.DragActivity" />
-        <activity android:name=".ui.RxJava2Activity" />
+        <activity android:name=".ui.RxJava2Activity">
+
+        </activity>
         <activity
             android:name=".ui.FragmentActivity"
             android:launchMode="singleTask" />
         <activity android:name=".ui.LoadPluginActivity" />
         <activity android:name=".ui.VpIndicatorActivity" />
-        <activity android:name=".ui.MainActivity" />
-        <activity android:name=".ui.AopActivity" />
-        <activity android:name="com.example.dnbus.plugin.ProxyActivity" />
-
+        <activity android:name=".ui.MainActivity" /> <!-- <activity android:name=".ui.AopActivity" /> -->
+        <!-- <activity android:name="com.example.dnbus.plugin.ProxyActivity" /> -->
         <service android:name=".aidl.MyService" />
         <service
             android:name=".aidl.MessengerService"

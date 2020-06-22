@@ -2,8 +2,7 @@ package com.example.mystudy.widgets
 
 import android.graphics.Rect
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
-import com.example.mystudy.utils.L
+import com.example.mystudy.utils.LogUtils
 
 class CustomLayoutManager2 : RecyclerView.LayoutManager() {
 
@@ -27,7 +26,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
 
     //2.对Item进行布局
     override fun onLayoutChildren(recycler: RecyclerView.Recycler, state: RecyclerView.State?) {
-        L.e(TAG, "onLayoutChildren->before detach $childCount")
+        LogUtils.e(TAG, "onLayoutChildren->before detach $childCount")
         //没有Item
         if (itemCount == 0) {
             //剥离所有Item，清空屏幕
@@ -35,7 +34,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
             return
         }
         detachAndScrapAttachedViews(recycler)
-        L.e(TAG, "onLayoutChildren->after detach $itemCount")
+        LogUtils.e(TAG, "onLayoutChildren->after detach $itemCount")
         //申请一个HolderView,获取其宽高
         val itemView0 = recycler?.getViewForPosition(0)
         //先测量item才能获取宽高
@@ -46,7 +45,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
         //计算屏幕上可以显示多少个
 //        visibleCount = Math.ceil(getVerticalSpace() / mItemH.toDouble()).toInt()
         visibleCount = getVerticalSpace() / mItemH
-        L.e(TAG, "onLayoutChildren->vSpace->${getVerticalSpace()},mItemH->$mItemH," +
+        LogUtils.e(TAG, "onLayoutChildren->vSpace->${getVerticalSpace()},mItemH->$mItemH," +
                 "visibleCount $visibleCount,")
 
         //保存所有的item位置信息及子item总共的高度
@@ -77,7 +76,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
         var offsetY = 0
         //itemCount = 50  总数
         var measuredHeight = 0
-        L.e(TAG, itemCount.toString())
+        LogUtils.e(TAG, itemCount.toString())
         for (i in 0 until itemCount) {
             val view = recycler?.getViewForPosition(i)
             //添加测量子View并摆放
@@ -90,7 +89,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
             offsetY += measuredHeight
         }
         mTotalHeight = Math.max(offsetY, getVerticalSpace())
-        L.e(TAG, "rvH->${getVerticalSpace()},子item总高度->$offsetY,itemH->$measuredHeight}")*/
+        LogUtils.e(TAG, "rvH->${getVerticalSpace()},子item总高度->$offsetY,itemH->$measuredHeight}")*/
     }
 
     //RecyclerView竖直方向内容高度 = 自己高度 - paddingTop - paddingBottom
@@ -104,7 +103,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
     }
 
 //    override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler?, state: RecyclerView.State?): Int {
-//        L.e(TAG,"dy->$dy")
+//        LogUtils.e(TAG,"dy->$dy")
 //        //dy表示手指在屏幕上每次滑动的位移
 //        //上滑时，dy>0,因为上滑需要Item的y轴减少，所以需要减去dy
 //        //下滑时，dy<0
@@ -118,7 +117,7 @@ class CustomLayoutManager2 : RecyclerView.LayoutManager() {
 
     //4.增加滑动限制，顶部不能上滑 底部不能下滑
     override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler, state: RecyclerView.State?): Int {
-        L.e(TAG, "scrollVerticallyBy dy->$dy,childCount->$childCount,scrapCache->${recycler!!.scrapList.size}")
+        LogUtils.e(TAG, "scrollVerticallyBy dy->$dy,childCount->$childCount,scrapCache->${recycler!!.scrapList.size}")
         if (childCount <= 0) {
             return dy
         }

@@ -10,7 +10,7 @@ import android.provider.Settings
 import android.view.*
 import android.widget.Toast
 import com.example.mystudy.R
-import com.example.mystudy.utils.L
+import com.example.mystudy.utils.LogUtils
 import kotlinx.android.synthetic.main.activity_drag.*
 import kotlinx.android.synthetic.main.layout_float_window.view.*
 
@@ -42,7 +42,7 @@ class DragActivity : AppCompatActivity() {
         myView.post {
             viewX = myView.x
             viewY = myView.y
-            L.e("TAG","x->$viewX，y->$viewY")
+            LogUtils.e("TAG","x->$viewX，y->$viewY")
         }
     }
 
@@ -52,17 +52,17 @@ class DragActivity : AppCompatActivity() {
         var w = 0
         /*view.setOnTouchListener { v, event ->
             w = v.width
-            L("onTouch:$w")
+            LogUtils("onTouch:$w")
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     downX = event.x
-                    L("downX:$downX")
+                    LogUtils("downX:$downX")
                     return@setOnTouchListener true
                 }
                 MotionEvent.ACTION_MOVE -> {
                     moveX = event.x - downX
-                    L("MOVE:${event.x},$downX")
-                    L("moveX:$moveX")
+                    LogUtils("MOVE:${event.x},$downX")
+                    LogUtils("moveX:$moveX")
                     v.translationX += moveX
 
                     when(v.translationX/w){
@@ -106,12 +106,12 @@ class DragActivity : AppCompatActivity() {
                     mWDownX = event.rawX
                     mWDownY = event.rawY
                     eventY = event.y
-                    L.e("TAG","downX->${event.x},downY->${event.y},")
-                    L.e("TAG","down l->${v.left}，t->${v.top},r->${v.right},b->${v.bottom}")
+                    LogUtils.e("TAG","downX->${event.x},downY->${event.y},")
+                    LogUtils.e("TAG","down l->${v.left}，t->${v.top},r->${v.right},b->${v.bottom}")
                     return@setOnTouchListener true
                 }
                 MotionEvent.ACTION_MOVE->{
-                    L.e("TAG","moveX->${event.x},moveY->${event.y},")
+                    LogUtils.e("TAG","moveX->${event.x},moveY->${event.y},")
                     val curX = event.rawX
                     val curY = event.rawY
                     mMoveX = curX - mWDownX
@@ -121,7 +121,7 @@ class DragActivity : AppCompatActivity() {
                     wm.updateViewLayout(windowView, mWindowParams)
                     mWDownX = curX
                     mWDownY = curY
-                    L.e("TAG","move l->${v.left}，t->${v.top},r->${v.right},b->${v.bottom}")
+                    LogUtils.e("TAG","move l->${v.left}，t->${v.top},r->${v.right},b->${v.bottom}")
 
 
                     if (curY+(v.height - eventY)>viewY){
@@ -157,12 +157,12 @@ class DragActivity : AppCompatActivity() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     lastX = x
-                    L("downX:$lastX")
+                    LogUtils("downX:$lastX")
                     return@setOnTouchListener true
                 }
                 MotionEvent.ACTION_MOVE -> {
                     moveX = x - lastX
-                    L("moveX:$moveX")
+                    LogUtils("moveX:$moveX")
                     //              1.      v.translationX+=moveX
                     //                    v.offsetLeftAndRight(moveX.toInt())
                     v.layout((v.left + moveX).toInt(), v.top, (v.right + moveX).toInt(), v.bottom)

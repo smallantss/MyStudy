@@ -4,4 +4,5 @@ package com.example.mystudy.rx
 
      //只有一个订阅的方法
     fun subscribe(observer:Observer<T>)
-}
+
+ }

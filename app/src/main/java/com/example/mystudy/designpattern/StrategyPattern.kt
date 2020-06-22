@@ -32,7 +32,6 @@ class BusStrategy:ICalculateStrategy{
         return "Bus$km"
     }
 }
-
 class CarStrategy:ICalculateStrategy{
     override fun calculate(km: Int):String{
         return "Car$km"

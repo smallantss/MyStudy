@@ -1,11 +1,14 @@
 package com.example.mystudy.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mystudy.R
+import com.example.mystudy.aop.*
 import kotlin.random.Random
 
 class AopActivity : AppCompatActivity() {
@@ -15,13 +18,62 @@ class AopActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_aop)
+        NetCheckUtils2.getInstance().register(this)
+        Log.e(TAG,"onCreatestate->"+lifecycle.currentState)
+    }
 
+    override fun onStart() {
+        super.onStart()
+        Log.e(TAG,"onStartstate->"+lifecycle.currentState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Handler().post {
+            Log.e(TAG,"onResumestate->"+lifecycle.currentState)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e(TAG,"onPausestate->"+lifecycle.currentState)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e(TAG,"onStopstate->"+lifecycle.currentState)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.e(TAG,"onRestartstate->"+lifecycle.currentState)
+    }
+
+    override fun onDestroy() {
+        NetCheckUtils2.getInstance().unregister(this);
+        Log.e(TAG,"onDestroystate->"+lifecycle.currentState)
+        super.onDestroy()
     }
 
     fun onClick(view:View){
-        startActivity(Intent(this, FragmentActivity::class.java))
+//        startActivity(Intent(this, FragmentActivity::class.java))
 //        shakeFun()
 //        talk()
+        when(view.id){
+            R.id.btnNoParams->{
+                noParam()
+            }
+            R.id.btnParams->{
+                Log.e(TAG,"onClickstate->"+lifecycle.currentState)
+                hasParams(1)
+            }
+            R.id.annoNoParams->{
+                annoNoParams()
+            }
+            R.id.annoParams->{
+                annoWithParams()
+            }
+        }
     }
 
     fun shakeFun(){
@@ -40,7 +92,54 @@ class AopActivity : AppCompatActivity() {
         Log.e(TAG,"聊天花费了$duration")
     }
 
+    fun noParam(){
+        startActivity(Intent(this, FragmentActivity::class.java))
+        Log.e(TAG,"这是noParam的方法")
+    }
 
+    fun hasParams(a:Int){
+        Log.e(TAG,"这是hasParams的方法")
+    }
 
+    @CheckNet
+    fun annoNoParams(){
+        Log.e(TAG,"这是annoNoParams 的方法")
+    }
 
+    @CheckNetWithParams(25)
+    fun annoWithParams(){
+        Log.e(TAG,"这是annoWithParams的方法")
+    }
+
+    @NetChange
+    fun onNetChange(isConnect:Boolean){
+        Log.e(TAG, "onNetChange->$isConnect")
+        Toast.makeText(this, "Aop网络变化了", Toast.LENGTH_SHORT).show()
+    }
+
+    @NetChange(netType = NetType.NET_NO)
+    fun onChange(netType: NetType) {
+        when (netType) {
+            NetType.NET_NO -> {
+                Log.e(TAG, "onNetChange->NET_NO")
+                Toast.makeText(this, "变化了-无网络", Toast.LENGTH_SHORT).show()
+            }
+            NetType.NET_WIFI -> {
+                Log.e(TAG, "onNetChange->NET_WIFI")
+                Toast.makeText(this, "变化了-WiFi", Toast.LENGTH_SHORT).show()
+            }
+            NetType.NET_MOBILE -> {
+                Log.e(TAG, "onNetChange->NET_MOBILE")
+                Toast.makeText(this, "变化了-mobile", Toast.LENGTH_SHORT).show()
+            }
+            NetType.NET_UNKNOWN -> {
+                Log.e(TAG, "onNetChange->NET_UNKNOWN")
+                Toast.makeText(this, "变化了-未知", Toast.LENGTH_SHORT).show()
+            }
+            else -> {
+                Log.e(TAG, "onNetChange->NET_ALL")
+                Toast.makeText(this, "变化了-ALL", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }

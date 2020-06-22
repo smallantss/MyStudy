@@ -1,8 +1,7 @@
 package com.example.mystudy.widgets
 
 import androidx.recyclerview.widget.RecyclerView
-import android.util.Log
-import com.example.mystudy.utils.L
+import com.example.mystudy.utils.LogUtils
 
 class CustomLayoutManager : RecyclerView.LayoutManager() {
 
@@ -23,7 +22,7 @@ class CustomLayoutManager : RecyclerView.LayoutManager() {
         var offsetY = 0
         //itemCount = 50  总数
         var measuredHeight = 0
-        L.e(TAG, itemCount.toString())
+        LogUtils.e(TAG, itemCount.toString())
         for (i in 0 until itemCount){
             val view = recycler?.getViewForPosition(i)
             //添加测量子View并摆放
@@ -36,7 +35,7 @@ class CustomLayoutManager : RecyclerView.LayoutManager() {
             offsetY+=measuredHeight
         }
         mTotalHeight = Math.max(offsetY,getVerticalSpace())
-        L.e(TAG,"rvH->${getVerticalSpace()},子item总高度->$offsetY,itemH->$measuredHeight}")
+        LogUtils.e(TAG,"rvH->${getVerticalSpace()},子item总高度->$offsetY,itemH->$measuredHeight}")
     }
 
     //RecyclerView竖直方向内容高度 = 自己高度 - paddingTop - paddingBottom
@@ -50,7 +49,7 @@ class CustomLayoutManager : RecyclerView.LayoutManager() {
     }
 
 //    override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler?, state: RecyclerView.State?): Int {
-//        L.e(TAG,"dy->$dy")
+//        LogUtils.e(TAG,"dy->$dy")
 //        //dy表示手指在屏幕上每次滑动的位移
 //        //上滑时，dy>0,因为上滑需要Item的y轴减少，所以需要减去dy
 //        //下滑时，dy<0
@@ -62,7 +61,7 @@ class CustomLayoutManager : RecyclerView.LayoutManager() {
     var sumDy = 0
     //4.增加滑动限制，顶部不能上滑 底部不能下滑
     override fun scrollVerticallyBy(dy: Int, recycler: RecyclerView.Recycler?, state: RecyclerView.State?): Int {
-        L.e(TAG,"dy->$dy")
+        LogUtils.e(TAG,"dy->$dy")
         var moveY = dy
         //上滑时，dy>0
         //下滑时，dy<0

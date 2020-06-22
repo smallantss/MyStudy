@@ -5,12 +5,11 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.RectF
-import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.view.View
 import com.example.mystudy.BuildConfig
 import com.example.mystudy.R
-import com.example.mystudy.utils.L
+import com.example.mystudy.utils.LogUtils
 
 /**
  * 带阴影的View
@@ -25,7 +24,6 @@ class ShadowView @JvmOverloads constructor(
     private val mShadowRadius: Int
     private val mRadius: Int
     private val mPaint: Paint = Paint().apply {
-        style = Paint.Style.FILL
     }
     private val rect = RectF()
 
@@ -36,11 +34,10 @@ class ShadowView @JvmOverloads constructor(
             //四舍五入获取px   offset 忽略小数获取px
             mDx = getDimensionPixelSize(R.styleable.ShadowView_shadowDx, 0)
             mDy = getDimensionPixelSize(R.styleable.ShadowView_shadowDy, 0)
-            mShadowRadius = getDimensionPixelSize(R.styleable.ShadowView_shadowRadius, 10)
+            mShadowRadius = getDimensionPixelSize(R.styleable.ShadowView_shadowRadius, 0)
             mRadius = getDimensionPixelSize(R.styleable.ShadowView_radius, 0)
             mShadowColor = getColor(R.styleable.ShadowView_shadowColor, Color.BLACK)
-            L.e("mDx->$mDx,mDy->$mDy,mShadowRadius->$mShadowRadius,mRadius->$mRadius")
-            rect.set(mShadowRadius.toFloat(), mShadowRadius.toFloat(), (width - mShadowRadius).toFloat(), (height - mShadowRadius).toFloat())
+            LogUtils.e("mDx->$mDx,mDy->$mDy,mShadowRadius->$mShadowRadius,mRadius->$mRadius")
             recycle()
         }
     }
@@ -60,27 +57,57 @@ class ShadowView @JvmOverloads constructor(
         setMeasuredDimension(wSize, hSize)
     }
 
+    /**
+     * 使用Paint.setShadowLayer
+     * 阴影就等于在绘制的内容下面又绘制了一层，我们可以通过设置阴影的radius让其变得模糊
+     * 因此，总宽 = 内容宽 + radius模糊半径*2
+     */
     override fun onDraw(canvas: Canvas?) {
-        measuredWidth
         //绘制出边界
         if (BuildConfig.DEBUG) {
-            canvas?.drawRect(0f, 0f, width.toFloat(), height.toFloat(), Paint().apply {
+            canvas?.drawRect(0f, 0f, measuredWidth.toFloat(), measuredHeight.toFloat(), Paint().apply {
                 style = Paint.Style.STROKE
                 isAntiAlias = true
                 strokeWidth = 1f
-                color = Color.MAGENTA
+                color = Color.BLACK
             })
         }
-        if (background is ColorDrawable) {
-            mPaint.color = (background as ColorDrawable).color
-        } else {
-            mPaint.color = Color.RED
-        }
+        val paddingL = paddingLeft
+        val paddingT = paddingTop
+        val paddingR = paddingRight
+        val paddingB = paddingBottom
         //绘制的内容  阴影+内容宽 = 总宽
+        rect.set(paddingL + mShadowRadius.toFloat(),paddingT+mShadowRadius.toFloat(), (measuredWidth - mShadowRadius - paddingR).toFloat(), (measuredHeight - mShadowRadius - paddingB).toFloat())
         //设置阴影的属性
         mPaint.setShadowLayer(mShadowRadius.toFloat(), mDx.toFloat(), mDy.toFloat(), mShadowColor)
+        mPaint.style = Paint.Style.STROKE
+        mPaint.color = mShadowColor
         canvas?.drawRoundRect(rect, mRadius.toFloat(), mRadius.toFloat(), mPaint)
     }
+
+
+    /**
+     * 使用Paint.setMaskFilter
+     */
+//    override fun onDraw(canvas: Canvas?) {
+//        //绘制出边界
+//        if (BuildConfig.DEBUG) {
+//            canvas?.drawRect(0f, 0f, measuredWidth.toFloat(), measuredHeight.toFloat(), Paint().apply {
+//                style = Paint.Style.STROKE
+//                isAntiAlias = true
+//                strokeWidth = 1f
+//                color = Color.BLACK
+//            })
+//        }
+//        val paddingL = paddingLeft
+//        val paddingT = paddingTop
+//        val paddingR = paddingRight
+//        val paddingB = paddingBottom
+//        mPaint.color = Color.RED
+//        mPaint.maskFilter = BlurMaskFilter(mShadowRadius.toFloat(),BlurMaskFilter.Blur.SOLID)
+//        rect.set(paddingL+ mShadowRadius.toFloat(),paddingT+mShadowRadius.toFloat(),(measuredWidth - mShadowRadius- paddingR).toFloat(),(measuredHeight - mShadowRadius - paddingB).toFloat())
+//        canvas?.drawRoundRect(rect,mRadius.toFloat(), mRadius.toFloat(),mPaint)
+//    }
 
 
 }
