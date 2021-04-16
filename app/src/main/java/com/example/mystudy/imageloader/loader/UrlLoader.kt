@@ -33,7 +33,7 @@ class UrlLoader : AbstractLoader() {
                         //第二次关闭流
                         finalInputStream.close()
                     }
-                    return bitmap
+                    return bitmap!!
                 }
 
             }

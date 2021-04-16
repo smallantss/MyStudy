@@ -36,7 +36,7 @@ class VpIndicatorActivity : AppCompatActivity() {
         setContentView(R.layout.activity_vp_indicator)
 
         val dir = getExternalFilesDir(Environment.DIRECTORY_ALARMS)
-        L(dir.absolutePath)
+        L(dir!!.absolutePath)
 
         bindRemoteService()
 
