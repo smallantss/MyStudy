@@ -1,6 +1,6 @@
 package com.example.mystudy.net
 
-import com.example.mystudy.loge
+import com.example.mystudy.ui.loge
 import okhttp3.*
 import okhttp3.internal.http.HttpHeaders
 import okio.Buffer

@@ -1,4 +1,4 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.widget.Toast
 import com.example.dnbus.DnBus
 import com.example.dnbus.Subscribe
 import com.example.dnbus.ThreadMode
+import com.example.mystudy.R
 import com.example.mystudy.utils.ScreenDensityUtils
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
     fun onClick(view:View){
         DnBus.getInstance().post("aaaaa")
-        startActivity(Intent(this,MyIntentService::class.java))
+        startActivity(Intent(this, MyIntentService::class.java))
     }
 
 

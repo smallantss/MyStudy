@@ -1,13 +1,12 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.View
+import com.example.mystudy.R
 
 class FragmentActivity : AppCompatActivity() {
     val tag = "TAG"
@@ -62,8 +61,8 @@ class FragmentActivity : AppCompatActivity() {
         showDialog()
         hideAll()
         when(v.id){
-            R.id.button0->{
-                startActivity(Intent(this,AopActivity::class.java))
+            R.id.button0 ->{
+                startActivity(Intent(this, AopActivity::class.java))
 //                if (fm0==null){
 //                    fm0 = BlankFragment.newInstance("这是第一个")
 //                }
@@ -78,7 +77,7 @@ class FragmentActivity : AppCompatActivity() {
 //                fm0!!.setData("改变了0")
 
             }
-            R.id.button1->{
+            R.id.button1 ->{
                 if (fm1==null){
                     fm1 = BlankFragment.newInstance("这是第一个")
                 }
@@ -92,7 +91,7 @@ class FragmentActivity : AppCompatActivity() {
                 }
                 fm1!!.setData("改变了1")
             }
-            R.id.button2->{
+            R.id.button2 ->{
                 if (fm2==null){
                     fm2 = BlankFragment.newInstance("这是第2个")
                 }
@@ -106,7 +105,7 @@ class FragmentActivity : AppCompatActivity() {
                 }
                 fm2!!.setData("改变了2")
             }
-            R.id.button3->{
+            R.id.button3 ->{
                 if (fm3==null){
                     fm3 = BlankFragment.newInstance("这是第3个")
                 }

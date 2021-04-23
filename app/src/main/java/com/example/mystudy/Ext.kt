@@ -1,4 +1,4 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
 import android.util.Log
 

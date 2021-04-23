@@ -5,8 +5,12 @@ class Test {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val list = ArrayList<Person>()
-            list.add(Student())
+            val a: Int = 127
+            val boxedA: Int? = a
+            val anotherBoxedA: Int? = a
+            print(boxedA == anotherBoxedA)
+            print(boxedA === anotherBoxedA)
+
         }
 
         open class Person{

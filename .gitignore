@@ -12,3 +12,4 @@
 /androidTest
 /captures
 .externalNativeBuild
+/.idea/

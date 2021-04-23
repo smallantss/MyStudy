@@ -1,4 +1,4 @@
-package com.example.mystudy
+package com.example.mystudy.ui
 
 import android.annotation.SuppressLint
 import android.content.ComponentName
@@ -6,11 +6,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.*
 import android.support.v7.app.AppCompatActivity
-import android.support.constraint.ConstraintLayout
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.util.Log
@@ -19,7 +17,7 @@ import android.util.TypedValue.COMPLEX_UNIT_DIP
 import android.view.*
 import android.widget.TextView
 import android.widget.Toast
-import com.bumptech.glide.Glide
+import com.example.mystudy.R
 import com.example.mystudy.aidl.DESCRIPTOR
 import com.example.mystudy.aidl.MessengerService
 import com.example.mystudy.aidl.MyBinder

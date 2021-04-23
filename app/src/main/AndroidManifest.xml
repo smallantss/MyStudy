@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RxJava2Activity">
+        <activity android:name=".ui.RxJava2Activity"/>
+        <activity android:name=".ui.BlockActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -18,14 +19,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FragmentActivity"
-            android:launchMode="singleTask"></activity>
-        <activity android:name=".LoadPluginActivity" />
-        <activity android:name=".VpIndicatorActivity"></activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".AopActivity">
-
-        </activity>
+            android:name=".ui.FragmentActivity"
+            android:launchMode="singleTask" />
+        <activity android:name=".ui.LoadPluginActivity" />
+        <activity android:name=".ui.VpIndicatorActivity" />
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.AopActivity"></activity>
         <activity android:name="com.example.dnbus.plugin.ProxyActivity" />
 
         <service android:name=".aidl.MyService" />
