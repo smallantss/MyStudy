@@ -1,7 +1,7 @@
 package com.example.mystudy.coil.bitmap
 
 import android.graphics.Bitmap
-import android.support.annotation.Px
+import androidx.annotation.Px
 
 interface BitmapPool {
 

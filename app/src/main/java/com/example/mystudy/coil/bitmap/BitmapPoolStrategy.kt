@@ -2,7 +2,7 @@ package com.example.mystudy.coil.bitmap
 
 import android.graphics.Bitmap
 import android.os.Build.VERSION.SDK_INT
-import android.support.annotation.Px
+import androidx.annotation.Px
 import java.util.*
 
 /**

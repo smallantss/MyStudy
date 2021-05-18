@@ -1,7 +1,7 @@
 package com.example.mystudy.ui
 
 import android.os.*
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.example.mystudy.R
 import kotlinx.android.synthetic.main.activity_block.*
 import java.lang.StringBuilder

@@ -7,8 +7,8 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Build
 import android.os.StatFs
-import android.support.annotation.Px
-import android.support.v4.content.ContextCompat
+import androidx.annotation.Px
+import androidx.core.content.ContextCompat
 import java.io.File
 
 internal object Utils {

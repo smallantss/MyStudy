@@ -108,7 +108,7 @@ class HttpLoggingInterceptor : Interceptor {
         val buffer = Buffer()
         body.writeTo(buffer)
         val charset = getCharset(body.contentType())
-        loge("\tbody:${buffer.readString(charset)}")
+//        loge("\tbody:${buffer.readString(charset)}")
     }
 
     private val UTF8 = Charset.forName("UTF-8")
