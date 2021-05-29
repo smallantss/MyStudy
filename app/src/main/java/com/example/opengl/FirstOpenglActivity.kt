@@ -6,8 +6,6 @@ import android.opengl.GLES20.*
 import android.opengl.GLSurfaceView
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import com.example.mystudy.R
 import com.example.mystudy.ui.loge
@@ -15,9 +13,7 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
 import javax.microedition.khronos.egl.EGLConfig
-import javax.microedition.khronos.opengles.GL
 import javax.microedition.khronos.opengles.GL10
-import kotlin.properties.Delegates
 
 class FirstOpenglActivity : AppCompatActivity() {
 
@@ -33,7 +29,7 @@ class FirstOpenglActivity : AppCompatActivity() {
         val supportsEs2 = am.deviceConfigurationInfo.reqGlEsVersion >= 0x20000
         if (supportsEs2) {
             glSurfaceView.setEGLContextClientVersion(2)
-            glSurfaceView.setRenderer(AirHockyRenderer(this))
+            glSurfaceView.setRenderer(AirHockyRenderer3D03(this))
             rendererSet = true
         } else {
             Toast.makeText(this, "device not support OpenGL ES 2.0", Toast.LENGTH_SHORT).show()
@@ -92,7 +88,7 @@ class AirHockyRenderer(val context: Context) : GLSurfaceView.Renderer {
     //桌子长方形的四个点坐标
     private val tableVertices = floatArrayOf(0f, 0f, 0f, 14f, 9f, 14f, 9f, 0f)
 
-    //变为两个三角形坐标
+    //两个三角形 直线 两个点 一个点
     private val tableVerticesTriangles = floatArrayOf(
             -0.5f, -0.5f,
             0.5f, 0.5f,
@@ -107,7 +103,7 @@ class AirHockyRenderer(val context: Context) : GLSurfaceView.Renderer {
             0f, -0.25f,
             0f, 0.25f,
 
-            0f,0f
+            0f, 0f
     )
 
     //中间分割线,及两边两个点
@@ -166,6 +162,7 @@ class AirHockyRenderer(val context: Context) : GLSurfaceView.Renderer {
     }
 
     override fun onSurfaceChanged(gl: GL10?, width: Int, height: Int) {
+        glViewport(0, 0, width, height)
     }
 
     override fun onDrawFrame(gl: GL10?) {

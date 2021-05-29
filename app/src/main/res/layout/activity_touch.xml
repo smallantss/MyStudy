@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.diy.chapter05.TouchActivity">
+
+    <com.example.diy.chapter05.TouchScaleTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="奥古斯假发票via根据二怕结果v更怕就是怕\n斑点狗强迫推广和甲方v啊好发货v锯齿状按\n身高和求佛全国v哦i啊是vi哦啊VS附件" />
+
+</LinearLayout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.diy.chapter06.ScrollerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="100px"
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent" />
+
+        <com.example.diy.chapter06.ScrollLinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="点我"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/tvDel"
+                android:layout_width="100px"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark"
+                android:gravity="center"
+                android:text="删除"
+                android:textColor="@android:color/white" />
+
+        </com.example.diy.chapter06.ScrollLinearLayout>
+    </LinearLayout>
+
+    <com.example.diy.chapter06.DragLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/view1"
+            android:tag="view1"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:background="@color/colorAccent" />
+
+        <View
+            android:tag="view2"
+            android:id="@+id/view2"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:background="@color/colorPrimary" />
+
+        <View
+            android:tag="view3"
+            android:id="@+id/view3"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            android:background="@color/colorPrimaryDark" />
+
+    </com.example.diy.chapter06.DragLayout>
+
+
+</LinearLayout>
