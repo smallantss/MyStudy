@@ -10,7 +10,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.aspectj:aspectjtools:1.8.9'
+        classpath 'org.aspectj:aspectjtools:1.9.3'
         classpath 'org.aspectj:aspectjweaver:1.8.9'
     }
 }
@@ -41,7 +41,10 @@ android {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
+
+
     }
+
     buildTypes {
         release {
             minifyEnabled false

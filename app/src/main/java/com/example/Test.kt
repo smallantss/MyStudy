@@ -1,6 +1,8 @@
 package com.example
 
 import kotlinx.coroutines.*
+import okhttp3.*
+import java.io.IOException
 import java.util.*
 
 class Test {
@@ -8,10 +10,22 @@ class Test {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-//            testCoroutine()
+            testCoroutine()
 
-
-            testAsync()
+//            val client = OkHttpClient.Builder().build()
+//            val request = Request.Builder().build()
+//            val call = client.newCall(request)
+//            call.enqueue(object :Callback{
+//
+//                override fun onFailure(call: Call, e: IOException) {
+//
+//                }
+//
+//                override fun onResponse(call: Call, response: Response) {
+//
+//                }
+//            })
+//            testAsync()
         }
 
         private fun testRandom() {

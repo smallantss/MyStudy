@@ -29,12 +29,7 @@
         <activity android:name=".ui.ButterKnifeActivity" />
         <activity android:name=".ui.SkinActivity" />
         <activity android:name=".ui.NdkActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".audio.PcmActivity" />
         <activity android:name=".ui.AopActivity2">
@@ -65,8 +60,15 @@
             android:launchMode="singleTask" />
         <activity android:name=".ui.LoadPluginActivity" />
         <activity android:name=".ui.VpIndicatorActivity" />
-        <activity android:name=".ui.MainActivity" /> <!-- <activity android:name=".ui.AopActivity" /> -->
-        <!-- <activity android:name="com.example.dnbus.plugin.ProxyActivity" /> -->
+        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.HandlerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <service android:name=".aidl.MyService" />
         <service
             android:name=".aidl.MessengerService"
