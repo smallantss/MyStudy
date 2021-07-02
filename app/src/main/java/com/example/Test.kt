@@ -1,5 +1,10 @@
 package com.example
 
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.util.concurrent.atomic.AtomicBoolean
+import kotlin.concurrent.thread
+
 class Test {
 
     companion object {
@@ -13,13 +18,13 @@ class Test {
 
         }
 
-        open class Person{
-
-        }
-
-        class Student: Person() {
-
-        }
-
     }
+}
+
+class Person{
+
+}
+
+fun Person.add(a:Int){
+
 }
