@@ -1,9 +1,12 @@
 package com.example.diy.chapter06
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.FrameLayout
+import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.lifecycle.*
 import com.example.mystudy.R
 import com.example.mystudy.mvvm.viewmodel.MyViewModel
@@ -18,6 +21,8 @@ class SlideMenuActivity : AppCompatActivity() {
 
     val liveData = MutableLiveData<Int>()
 
+    val viewModel:MyViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +33,8 @@ class SlideMenuActivity : AppCompatActivity() {
         val menuWidth = resources.getDimensionPixelSize(R.dimen.menu_width)
         slideMenuGroup.setView(view, FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT),
                 menu, FrameLayout.LayoutParams(menuWidth, FrameLayout.LayoutParams.MATCH_PARENT))
-
+        viewModel.a()
         lifecycle.addObserver(LifecycleUtil())
-
 
     }
 

@@ -15,6 +15,7 @@ class FragmentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment)
         Log.e(tag,"onCreate")
+        getSharedPreferences("").edit().commit()
     }
 
     override fun onStart() {
@@ -52,29 +53,29 @@ class FragmentActivity : AppCompatActivity() {
         Log.e(tag,"onNewIntent")
     }
 
-    private var fm0: BlankFragment?=null
+    private var fm0: BlankFragment2?=null
     private var fm1: BlankFragment?=null
     private var fm2: BlankFragment?=null
     private var fm3: BlankFragment?=null
 
     fun onClick(v: View){
-        showDialog()
+//        showDialog()
         hideAll()
         when(v.id){
             R.id.button0 ->{
-                startActivity(Intent(this, AopActivity::class.java))
-//                if (fm0==null){
-//                    fm0 = BlankFragment.newInstance("这是第一个")
-//                }
-//                if (fm0!!.isAdded){
-//                    supportFragmentManager.beginTransaction().show(fm0!!)
-//                            .commitNowAllowingStateLoss()
-//                }else{
-//                    supportFragmentManager.beginTransaction().add(R.id.frameLayout,fm0!!)
-//                            .show(fm0!!)
-//                            .commitNowAllowingStateLoss()
-//                }
-//                fm0!!.setData("改变了0")
+//                startActivity(Intent(this, AopActivity::class.java))
+                if (fm0==null){
+                    fm0 = BlankFragment2.newInstance("这是第一个")
+                }
+                if (fm0!!.isAdded){
+                    supportFragmentManager.beginTransaction().show(fm0!!)
+                            .commitNowAllowingStateLoss()
+                }else{
+                    supportFragmentManager.beginTransaction().add(R.id.frameLayout,fm0!!)
+                            .attach(fm0!!)
+                            .commitNowAllowingStateLoss()
+                }
+                fm0!!.setData("改变了0")
 
             }
             R.id.button1 ->{
@@ -85,7 +86,7 @@ class FragmentActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().show(fm1!!)
                             .commitNowAllowingStateLoss()
                 }else{
-                    supportFragmentManager.beginTransaction().add(R.id.frameLayout,fm1!!)
+                    supportFragmentManager.beginTransaction().replace(R.id.frameLayout,fm1!!)
                             .show(fm1!!)
                             .commitNowAllowingStateLoss()
                 }
