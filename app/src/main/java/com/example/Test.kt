@@ -2,6 +2,8 @@ package com.example
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.lang.ref.ReferenceQueue
+import java.lang.ref.WeakReference
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.concurrent.thread
 import kotlin.random.Random
@@ -11,32 +13,75 @@ class Test {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
+            val leakCanary = try {
+                val leakCanaryListener = Class.forName("com.example.LeakCanary")
+                val r = leakCanaryListener.getDeclaredField("INSTANCE").get(null)
+                println(r)
+            } catch (ignored: Throwable) {
+                ignored.printStackTrace()
+                println("exception:")
+            }
+            println("end")
+        }
+
+        private fun testMethod(method: () -> Unit) {
+            method()
+        }
+
+        //虚引用对象被强引用，看能否被回收
+        private fun testWeakReference() {
+            val rq = ReferenceQueue<Person?>()
+            val weakReference = testGc(rq)
+            System.gc()
+            Thread.sleep(2000)
+            if (weakReference.isEnqueued) {
+                //说明已经在引用队列
+                println("不置null 已经被清除")
+            } else {
+                println("不置null 没有被清除")
+            }
+//            System.gc()
+//            Thread.sleep(2000)
+//            if (weakReference.isEnqueued){
+//                //说明已经在引用队列
+//                println("置null 已经被清除")
+//            }else{
+//                println("置null 没有被清除")
+//            }
+            println(weakReference.get())
+        }
+
+        private fun testGc(rq: ReferenceQueue<Person?>): WeakReference<Person?> {
+            return WeakReference(Person(10), rq)
+        }
+
+        private fun testGenerate() {
             var r: Int = -1
-            var threada:Thread?=null
-            var threadb:Thread?=null
+            var threada: Thread? = null
+            var threadb: Thread? = null
             var exited1 = true
             thread {
                 while (true) {
                     Thread.sleep(4000)
                     r = getData()
                     println("生成:$r")
-                    if (r==4){
+                    if (r == 4) {
                         exited1 = true
-                        if (threada==null){
+                        if (threada == null) {
                             threada = thread {
-                                while (exited1){
+                                while (exited1) {
                                     Thread.sleep(3000)
-                                    println("------"+4)
+                                    println("------" + 4)
                                 }
                             }
                         }
-                    }else if (r==1){
+                    } else if (r == 1) {
                         exited1 = false
-                        if (threadb==null){
+                        if (threadb == null) {
                             threadb = thread {
-                                while (!exited1){
+                                while (!exited1) {
                                     Thread.sleep(1000)
-                                    println("------"+1)
+                                    println("------" + 1)
                                 }
                             }
                         }
@@ -139,5 +184,9 @@ class Consumer(private val list: ArrayList<Bread>) {
 }
 
 fun Person.add(a: Int) {
+
+}
+
+object LeakCanary{
 
 }
