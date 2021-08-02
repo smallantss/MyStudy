@@ -1,11 +1,12 @@
-package com.example.mystudy.ui
+package com.example.mystudy.optimize
 
 import android.os.*
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mystudy.R
+import com.example.mystudy.ui.loge
 import kotlinx.android.synthetic.main.activity_block.*
 import java.lang.StringBuilder
-import kotlin.math.min
 
 class BlockActivity : AppCompatActivity() {
 
@@ -71,5 +72,47 @@ class BlockActivity : AppCompatActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
+    private fun detectIdleHandler(){
+        val queue = Looper.getMainLooper().queue
+        val field = queue.javaClass.getDeclaredField("mIdleHandlers")
+        field.isAccessible = true
+        val newList = MyIdleList()
+        field.set(queue,newList)
+    }
+
+    class MyIdleList:ArrayList<MessageQueue.IdleHandler>(){
+        val map = HashMap<MessageQueue.IdleHandler,MyIdleHandler>()
+
+        override fun add(element: MessageQueue.IdleHandler): Boolean {
+            if (element is MessageQueue.IdleHandler){
+                val myIdleHandler = MyIdleHandler(element)
+                map[element] = myIdleHandler
+                return super.add(myIdleHandler);
+            }
+            return super.add(element)
+        }
+
+        override fun remove(element: MessageQueue.IdleHandler): Boolean {
+            if (element is MyIdleHandler){
+                map.remove(element.idleHandler)
+                return super.remove(element.idleHandler)
+            }else{
+                val myIdleHandler = map.remove(element)
+                if (myIdleHandler!=null){
+                    return super.remove(myIdleHandler)
+                }
+            }
+            return super.remove(element)
+        }
+    }
+
+    class MyIdleHandler(val idleHandler: MessageQueue.IdleHandler):MessageQueue.IdleHandler{
+        override fun queueIdle(): Boolean {
+
+            return true
+        }
+
+    }
 
 }

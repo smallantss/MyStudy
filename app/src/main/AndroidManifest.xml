@@ -12,24 +12,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.diy.chapter06.SlideMenuActivity">
+        <activity android:name=".hook.SubActivity"></activity>
+        <activity android:name=".hook.HookActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-        <activity android:name="com.example.diy.chapter06.ScrollerActivity">
-        </activity>
-        <activity android:name="com.example.diy.chapter05.TouchActivity">
-        </activity>
-        <activity android:name="com.example.diy.chapter03.WidgetActivity">
-        </activity>
-        <activity android:name="com.example.diy.chapter01.CameraActivity">
-        </activity>
+        <activity android:name="com.example.diy.chapter06.SlideMenuActivity" />
+        <activity android:name="com.example.diy.chapter06.ScrollerActivity" />
+        <activity android:name="com.example.diy.chapter05.TouchActivity" />
+        <activity android:name="com.example.diy.chapter03.WidgetActivity" />
+        <activity android:name="com.example.diy.chapter01.CameraActivity" />
         <activity android:name="com.example.opengl.FirstOpenglActivity" />
         <activity android:name=".ui.AudioActivity" />
         <activity android:name=".ui.RxJava2Activity" />
-        <activity android:name=".ui.BlockActivity" />
+        <activity android:name=".optimize.BlockActivity" />
         <activity
             android:name=".ui.FragmentActivity"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

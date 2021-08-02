@@ -1,18 +1,120 @@
 package com.example
 
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.mystudy.java.loader.DiskClassLoader
+import com.google.gson.Gson
+import kotlinx.coroutines.*
 import java.lang.ref.ReferenceQueue
 import java.lang.ref.WeakReference
-import java.util.concurrent.atomic.AtomicBoolean
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
 import kotlin.random.Random
+
+open class Man(var name: String) {
+    open fun work() {}
+}
+
+class Boy(name: String) : Man(name)
+class Girl(name: String) : Man(name)
+
 
 class Test {
 
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
+        }
+
+        private fun testSequence(){
+            val list = listOf(Boy("aaa"), Boy("bbb"),Boy("ccc"))
+        }
+
+        private fun testFlatten() {
+            val dataList = listOf(
+                    listOf(Boy("boy1"), Boy("boy2")),
+                    listOf(Girl("girl1"), Girl("girl2"))
+            )
+            val list = dataList.flatten()
+            //单一的转换
+            val r = list.flatMap {
+                listOf(it.name, it.name.reversed())
+            }
+            println(r)
+        }
+
+        private fun testOutIn() {
+            val boy: Array<Man> = arrayOf()
+            val any: Array<Any> = arrayOf()
+            copyFromTo(boy, any)
+        }
+
+        private fun copyFromTo(from: Array<out Man>, to: Array<in Man>) {
+            from[0].name = "out 可以读取"
+//            from[0] = Man("out 不能修改")
+//            to[0].name = "in 不能读取"
+            to[0] = Boy("in 可以修改")
+            from.forEachIndexed { index, man ->
+                to[index] = man
+            }
+        }
+
+        private fun testInline() {
+            val mans: List<Man> = listOf()
+            findFirst(mans, Boy::class.java)
+            findFirst2<Boy>(mans)
+        }
+
+        //找到List<Man>中的第一个实例，要么是Boy要么是Girl。
+        private fun <T> findFirst(mans: List<Man>, clazz: Class<T>): T? {
+            val selected = mans.filter { clazz.isInstance(it) }
+            if (selected.isEmpty()) {
+                return null
+            }
+            return clazz.cast(selected[0])
+        }
+
+        private inline fun <reified T> findFirst2(mans: List<Man>): T? {
+            val selected = mans.filter { it is T }
+            if (selected.isEmpty()) {
+                return null
+            }
+            return selected[0] as T
+        }
+
+        private fun testT() {
+            val boys: List<Boy> = listOf()
+            testSuper(boys)
+        }
+
+        private fun testSuper(man: List<Man>) {
+        }
+
+        private fun testClassLoader() {
+            val diskClassLoader = DiskClassLoader("D:\\MyStudy\\app\\src\\main\\java\\com\\example\\mystudy\\java\\loader")
+            val clazz = diskClassLoader.loadClass("com.example.mystudy.java.loader.Jobs")
+            val obj = clazz.newInstance()
+            println(obj.javaClass.classLoader)
+            val method = clazz.getDeclaredMethod("say")
+            method.invoke(obj)
+        }
+
+        private suspend fun testAsync(coroutineScope: CoroutineScope) {
+            println("before:" + Date())
+            val a = coroutineScope.async {
+                delay(3000)
+                "a"
+            }
+            val b = coroutineScope.async {
+                delay(1000)
+                "b"
+            }
+            b.await()
+            println("after:" + Date())
+            a.await()
+            println("finish:" + Date())
+        }
+
+        private fun testObject() {
             val leakCanary = try {
                 val leakCanaryListener = Class.forName("com.example.LeakCanary")
                 val r = leakCanaryListener.getDeclaredField("INSTANCE").get(null)
@@ -132,13 +234,10 @@ class Test {
     }
 }
 
-class Person {
+class Person(age: Int) {
 
-    private var mAge: Int = 0
+    private var mAge: Int = age
 
-    constructor(age: Int) {
-        mAge = age
-    }
 
     @Synchronized
     fun work(name: String) {
@@ -187,6 +286,9 @@ fun Person.add(a: Int) {
 
 }
 
-object LeakCanary{
+object LeakCanary {
 
 }
+
+data class Bean1(val name: String, val age: Int)
+data class Bean2(val sex: Int, val single: Boolean)
