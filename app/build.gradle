@@ -16,7 +16,7 @@ buildscript {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.mystudy"
         minSdkVersion 15
@@ -98,8 +98,8 @@ dependencies {
     annotationProcessor project(path: ':butterknife_compiler')
     implementation project(path: ':butterknife_annotations')
     implementation project(path: ':butterknife')
-    implementation 'com.github.jokermonn:permissions4m:2.1.2-lib'
-    annotationProcessor 'com.github.jokermonn:permissions4m:2.1.2-processor'
+//    implementation 'com.github.jokermonn:permissions4m:2.1.2-lib'
+//    annotationProcessor 'com.github.jokermonn:permissions4m:2.1.2-processor'
 //    implementation 'com.ysbing:ypermission:1.1.0'
 }
 
