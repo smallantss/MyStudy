@@ -18,6 +18,9 @@ public class Test2 {
 
     public static void main(String[] args) throws Exception {
         testSemaphore();
+        byte[] data = new byte[4];
+        int b = 0;
+        b = data[0] & 0xff;
     }
 
     public static void testSemaphore() {

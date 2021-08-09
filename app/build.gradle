@@ -19,6 +19,12 @@ android {
         }
     }
 
+//    sourceSets {
+//        main {
+//            jniLibs.srcDirs = ['libs']
+//        }
+//    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -31,6 +37,7 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    implementation fileTree(dir: "$buildDir/native-libs",include: 'native-libs.jar')
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
@@ -38,6 +45,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
     implementation 'androidx.activity:activity-ktx:1.2.2'
     implementation 'androidx.fragment:fragment-ktx:1.3.3'
+    implementation project(path: ':sdk')
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
@@ -56,3 +64,16 @@ dependencies {
 repositories {
     mavenCentral()
 }
+
+//将so打包为native-libs.jar文件
+
+//task nativeLibsToJar(type:Jar,description:'create a jar archive of the native libs'){
+//    destinationDir file("$buildDir/native-libs")
+//    baseName 'native-libs'
+//    from fileTree(dir: 'libs',include: '**/*.so')
+//    into 'lib/'
+//}
+//
+//tasks.withType(JavaCompile){
+//    compileTask->compileTask.dependsOn(nativeLibsToJar)
+//}

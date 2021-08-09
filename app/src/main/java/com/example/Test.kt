@@ -1,13 +1,16 @@
 package com.example
 
 import com.example.mystudy.java.loader.DiskClassLoader
+import com.example.opengl.opencv.OpenCvUtil
 import com.google.gson.Gson
 import kotlinx.coroutines.*
+import java.lang.Exception
 import java.lang.ref.ReferenceQueue
 import java.lang.ref.WeakReference
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
+import kotlin.experimental.and
 import kotlin.random.Random
 
 open class Man(var name: String) {
@@ -17,16 +20,27 @@ open class Man(var name: String) {
 class Boy(name: String) : Man(name)
 class Girl(name: String) : Man(name)
 
+suspend fun add() {
+
+}
 
 class Test {
 
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
+//            Byte 8位有符号整数
+//            0x11111111 最大值127，前面一位代表符号
+           val a:Byte = 255.toByte()
+            println((a.toInt() and 0xff))
+            println(OpenCvUtil().testByte())
         }
 
-        private fun testSequence(){
-            val list = listOf(Boy("aaa"), Boy("bbb"),Boy("ccc"))
+        private fun testSequence() {
+            val list = listOf(Boy("aaa"), Boy("bbb"), Boy("ccc"))
+            val data = sequence {
+                yield(1)
+            }.toList()
         }
 
         private fun testFlatten() {
