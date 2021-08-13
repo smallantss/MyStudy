@@ -8,7 +8,7 @@ import android.graphics.RectF
 import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 
 class RoundLayout @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

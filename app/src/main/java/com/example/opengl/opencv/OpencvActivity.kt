@@ -2,6 +2,8 @@ package com.example.opengl.opencv
 
 import android.Manifest
 import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -9,59 +11,62 @@ import android.os.Bundle
 import android.os.Environment
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.mystudy.BuildConfig
 import com.example.mystudy.R
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
+import com.example.mystudy.service.InstallApkBroadCastReceiver
+import com.example.mystudy.silenceInstall
 import kotlinx.android.synthetic.main.activity_opencv.*
-import kotlinx.coroutines.MainScope
 import org.opencv.android.OpenCVLoader
 import org.opencv.android.Utils
 import org.opencv.core.*
 import org.opencv.imgcodecs.Imgcodecs
 import org.opencv.imgproc.Imgproc
 import kotlin.experimental.and
-import kotlin.random.Random
 
 class OpencvActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_opencv)
+        tvVersion.text = BuildConfig.VERSION_NAME
         loadOpenCV()
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             requestPermissions(arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
         }
         btn1.setOnClickListener {
 //            OpenCvUtil().changeCompare(this,iv)
-            normalizeMat()
+//            normalizeMat()
+            silenceInstall(Environment.getExternalStorageDirectory().absolutePath + "/app-debug.apk")
         }
         btn2.setOnClickListener {
-            addWeight(1.5,-0.5,100.0)
+            addWeight(1.5, -0.5, 100.0)
         }
         btn3.setOnClickListener {
-            addWeight(0.5,0.5,0.0)
+            addWeight(0.5, 0.5, 0.0)
         }
         btn4.setOnClickListener {
-            addWeight(0.5,0.5,100.0)
+            addWeight(0.5, 0.5, 100.0)
         }
     }
 
     private fun normalizeMat(){
-        val src = Mat(400,400,CvType.CV_32FC3)
-        val data = FloatArray(400*400*3)
+        val src = Mat(400, 400, CvType.CV_32FC3)
+        val data = FloatArray(400 * 400 * 3)
         val random = java.util.Random()
         for (i in data.indices){
             data[i] = random.nextGaussian().toFloat()
         }
-        src.put(0,0,data)
+        src.put(0, 0, data)
         val dst = Mat()
         //归一化处理，NORM_MINMAX代表最小与最大值归一化方法
         //dst = (x-min)/(max-min)*(b-a)+a
         //x代表src像素值，min、max代表src像素中最小最大值
         //对src各个通道计算完成得到最终归一化结果
         //若结果有正负值，则显示前调用convertScaleAbs来对负值取绝对值图像
-        Core.normalize(src,dst,0.0,255.0,Core.NORM_MINMAX,-1, Mat())
+        Core.normalize(src, dst, 0.0, 255.0, Core.NORM_MINMAX, -1, Mat())
         val dst8U = Mat()
         //类型转换
-        dst.convertTo(dst8U,CvType.CV_8UC3)
+        dst.convertTo(dst8U, CvType.CV_8UC3)
         //创建了400*400的高斯噪声图像
         simpleMatToBitmap(dst8U)
     }
@@ -75,24 +80,24 @@ class OpencvActivity : AppCompatActivity() {
         Utils.bitmapToMat(bitmap2, src2)
         val res = Mat()
         //取反：常用于二值操作
-        Core.bitwise_not(src1,res)
+        Core.bitwise_not(src1, res)
         //取与：混合两张图象，可以降低混合图像亮度，输出图像任意位置像素小于等于任意输入图像的像素值
-        Core.bitwise_and(src1,src2,res)
+        Core.bitwise_and(src1, src2, res)
         //取或：混合两张图象，可以提高混合图像亮度，输出图像任意位置像素大于等于任意输入图像的像素值
-        Core.bitwise_or(src1,src2,res)
+        Core.bitwise_or(src1, src2, res)
         //异或：对输入图像的叠加取反
-        Core.bitwise_xor(src1,src2,res)
+        Core.bitwise_xor(src1, src2, res)
 
         val dst = Mat()
         //线性绝对值放缩变换：输入Mat对象数据求绝对值，并转为CV_8UC1类型的输出Mat
-        Core.convertScaleAbs(res,dst)
+        Core.convertScaleAbs(res, dst)
         //归一化：输入res归一化范围为[low,high]，输出图像dst类型默认res类型，遮罩层默认Mat()
         val low = 0.0
         val high = 10.0
-        Core.normalize(res,dst,low,high)
+        Core.normalize(res, dst, low, high)
     }
 
-    private fun addWeight(a:Double,b:Double,c:Double) {
+    private fun addWeight(a: Double, b: Double, c: Double) {
         val bitmap1 = BitmapFactory.decodeResource(resources, R.mipmap.a)
         val src1 = Mat()
         Utils.bitmapToMat(bitmap1, src1)

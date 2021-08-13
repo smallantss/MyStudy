@@ -5,7 +5,6 @@ import android.opengl.*
 import android.opengl.GLES20.*
 import android.opengl.Matrix.orthoM
 import com.example.mystudy.R
-import com.example.mystudy.ui.loge
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer

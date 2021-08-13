@@ -4,9 +4,15 @@ import com.example.mystudy.java.loader.DiskClassLoader
 import com.example.opengl.opencv.OpenCvUtil
 import com.google.gson.Gson
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
+import java.io.DataInputStream
+import java.io.PrintWriter
 import java.lang.Exception
 import java.lang.ref.ReferenceQueue
 import java.lang.ref.WeakReference
+import java.net.*
+import java.nio.charset.Charset
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.concurrent.thread
@@ -28,10 +34,174 @@ class Test {
 
     companion object {
         @JvmStatic
-        fun main(args: Array<String>) {
-//            Byte 8位有符号整数
-//            0x11111111 最大值127，前面一位代表符号
-           val a:Byte = 255.toByte()
+        fun main(args: Array<String>) = runBlocking {
+            studyStateFlow()
+        }
+
+        private suspend fun studyStateFlow() {
+            val stateFlow = MutableStateFlow(Person(10))
+            stateFlow.emit(Person(10))
+            stateFlow.emit(Person(11))
+            stateFlow.collect {
+                println(it.age)
+            }
+        }
+
+        private suspend fun studyFlowMap() {
+            val scope = CoroutineScope(Dispatchers.IO)
+            val flow = flow {
+                emit(1)
+                //共享开始协程作用域范围，控制共享的开始和结束的策略， 状态流的重播个数
+            }.shareIn(scope, WhileSubscribed(500), 0)
+        }
+
+        private suspend fun studySharedFlow() {
+            val sharedFlow = MutableSharedFlow<String>(2)
+            sharedFlow.emit("collect before 1")
+            sharedFlow.emit("collect before 2")
+            sharedFlow.emit("collect before 3")
+            CoroutineScope(Dispatchers.IO).launch {
+                delay(1000)
+                sharedFlow.emit("collect after 1")
+                sharedFlow.emit("collect after 2")
+            }
+            sharedFlow.collect {
+                println(it)
+            }
+        }
+
+        private suspend fun studySimpleFlow() {
+            flow {
+                println("aaa")
+                while (currentCoroutineContext().isActive) {
+                    emit(10)
+                    println("bbb")
+                }
+            }.flowOn(Dispatchers.IO).collect {
+
+            }
+        }
+
+        private suspend fun testFlow() {
+            val person = Person(10)
+            val stateFlow = MutableStateFlow(person)
+            CoroutineScope(Dispatchers.IO).launch {
+                while (true) {
+                    stateFlow.value = Person(20)
+                    delay(1000)
+                }
+            }
+            stateFlow.collect {
+                println(it)
+            }
+        }
+
+        private fun testSocket() {
+            initSocketServer()
+            initSocketClient()
+        }
+
+        private fun initSocketClient() {
+            thread {
+                val socket = Socket("localhost", 1234)
+                val os = socket.getOutputStream()
+                val data = "this is client data\n"
+                os.write(data.toByteArray())
+                println("client send server data:$data")
+            }
+        }
+
+        private fun initSocketServer() {
+            thread {
+                val server = ServerSocket(1234)
+                val socket: Socket = server.accept()
+                val data = ByteArray(1024)
+                socket.getInputStream().read(data)
+                println("server get client data:${data.toString(Charset.defaultCharset())}")
+            }
+        }
+
+        private fun testRead() {
+            val socket = Socket("localhost", 1234)
+            socket.getOutputStream().write("".toByteArray())
+            socket.getInputStream().readBytes()
+            val data = ByteArray(1024)
+            socket.getInputStream().read(data)
+        }
+
+        private fun testUDP() {
+            initUDPServer()
+            initUDPClient()
+        }
+
+        private fun initUDPServer() {
+            val server = DatagramSocket(1234)
+            val data = ByteArray(200)
+            val pakData = DatagramPacket(data, data.size)
+            thread {
+                while (true) {
+                    server.receive(pakData)
+                    val r = data.toString(Charsets.UTF_8)
+                    println("server get client data:$r")
+                    Thread.sleep(1000)
+                }
+            }
+            thread {
+                while (true) {
+                    if (pakData.address != null) {
+                        val r = "this is server data"
+                        server.send(DatagramPacket(r.toByteArray(), r.toByteArray().size, pakData.address, pakData.port))
+                        println("server send client data:${r}")
+                    }
+                    Thread.sleep(1000)
+                }
+            }
+        }
+
+        private fun initUDPClient() {
+            val client = DatagramSocket()
+            thread {
+                while (true) {
+                    val data = ("this is client data").toByteArray()
+                    val pakData = DatagramPacket(data, 0, data.size, InetAddress.getByName("172.16.1.163"), 1234)
+                    client.send(pakData)
+                    println("client send server data:this is client data")
+                    Thread.sleep(1000)
+                }
+            }
+            thread {
+                while (true) {
+                    val data = ByteArray(200)
+                    val pakData = DatagramPacket(data, 0, data.size)
+                    client.receive(pakData)
+                    val r = data.toString(Charsets.UTF_8)
+                    println("client get server data:$r")
+                    Thread.sleep(1000)
+                }
+            }
+        }
+
+        private fun testCancel() {
+            val job = CoroutineScope(Dispatchers.IO).launch {
+                val innerJob = launch {
+                    while (true) {
+                        delay(1000)
+                        println("inner job")
+                    }
+                }
+                while (true) {
+                    delay(1000)
+                    println("job")
+                }
+            }
+            Thread.sleep(5000)
+            job.cancel()
+        }
+
+        private fun testByte() {
+            //Byte 8位有符号整数
+            //0x11111111 最大值127，前面一位代表符号
+            val a: Byte = 255.toByte()
             println((a.toInt() and 0xff))
             println(OpenCvUtil().testByte())
         }
@@ -248,7 +418,7 @@ class Test {
     }
 }
 
-class Person(age: Int) {
+class Person(var age: Int) {
 
     private var mAge: Int = age
 

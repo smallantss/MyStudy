@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mystudy">
-
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.mystudy"
+    tools:ignore="ProtectedPermissions">
+    <!--     android:sharedUserId="android.uid.system" -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.RESTART_PACKAGES" />
+    <uses-permission android:name="android.permission.DELETE_PACKAGES" />
+    <uses-permission android:name="android.permission.INSTALL_PACKAGES" />
 
     <application
         android:allowBackup="true"
@@ -14,16 +21,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.opengl.opencv.OpencvActivity">
+        <activity android:name=".ui.DiyActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".hook.SubActivity" />
-        <activity android:name=".hook.HookActivity">
+        <activity android:name=".ui.RemoteActivity">
         </activity>
+        <activity android:name="com.example.opengl.opencv.OpencvActivity"></activity>
+        <activity android:name=".hook.SubActivity" />
+        <activity android:name=".hook.HookActivity" />
         <activity android:name="com.example.diy.chapter06.SlideMenuActivity" />
         <activity android:name="com.example.diy.chapter06.ScrollerActivity" />
         <activity android:name="com.example.diy.chapter05.TouchActivity" />
@@ -35,8 +44,7 @@
         <activity android:name=".optimize.BlockActivity" />
         <activity
             android:name=".ui.FragmentActivity"
-            android:launchMode="singleTask">
-        </activity>
+            android:launchMode="singleTask" />
         <activity android:name=".ui.LoadPluginActivity" />
         <activity android:name=".ui.VpIndicatorActivity" />
         <activity android:name=".ui.MainActivity" />
@@ -46,11 +54,42 @@
         <service android:name=".aidl.MyService" />
         <service
             android:name=".aidl.MessengerService"
-            android:process=":remote" /> <!-- 唯一标识，外部应用可通过该属性访问 -->
+            android:process=":remote" />
+        <service
+            android:name=".ui.RemoteService"
+            android:process=":server" /> <!-- 唯一标识，外部应用可通过该属性访问 -->
         <provider
             android:name=".cp.MyContentProvider"
             android:authorities="com.example.mystudy.provoder"
             android:process=":provider" />
+
+        <receiver android:name=".service.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".service.InstallApkBroadCastReceiver"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.PACKAGE_ADDED" />
+                <action android:name="android.intent.action.PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.PACKAGE_REMOVED" />
+
+                <data android:scheme="package" />
+            </intent-filter>
+        </receiver>
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.mystudy.android7.file.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

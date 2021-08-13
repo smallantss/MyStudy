@@ -2,7 +2,7 @@ package com.example.mystudy.utils
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.*
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 
 
 class SingleLiveData<T> : MutableLiveData<T>() {

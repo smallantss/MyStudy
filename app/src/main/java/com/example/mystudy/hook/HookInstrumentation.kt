@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.IBinder
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 
 class HookInstrumentation(private val real: Instrumentation) : Instrumentation() {
 

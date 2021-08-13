@@ -4,7 +4,7 @@ import android.os.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mystudy.R
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 import kotlinx.android.synthetic.main.activity_block.*
 import java.lang.StringBuilder
 

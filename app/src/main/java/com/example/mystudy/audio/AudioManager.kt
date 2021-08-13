@@ -3,7 +3,7 @@ package com.example.mystudy.audio
 import android.media.AudioFormat
 import android.media.AudioManager
 import android.media.AudioTrack
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 import java.lang.Exception
 
 object AudioManager {

@@ -9,8 +9,8 @@ import androidx.appcompat.app.AlertDialog
 import android.util.Log
 import android.view.Choreographer
 import android.view.View
-import kotlin.concurrent.thread
 import com.example.mystudy.R
+import com.example.mystudy.loge
 import kotlinx.android.synthetic.main.activity_fragment.*
 
 class FragmentActivity : AppCompatActivity(), Choreographer.FrameCallback, Runnable {

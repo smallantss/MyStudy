@@ -1,7 +1,7 @@
 package com.example.mystudy.utils
 
 import androidx.lifecycle.*
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 
 class LifecycleUtil : LifecycleEventObserver {
 

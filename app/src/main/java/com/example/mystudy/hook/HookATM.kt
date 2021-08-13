@@ -1,13 +1,12 @@
 package com.example.mystudy.hook
 
 import android.content.Intent
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 import java.lang.Exception
 import java.lang.reflect.Field
 import java.lang.reflect.InvocationHandler
 import java.lang.reflect.Method
 import java.lang.reflect.Proxy
-import kotlin.math.sin
 
 object HookATM {
 

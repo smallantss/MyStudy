@@ -5,13 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.SeekBar
 import com.example.mystudy.R
-import com.example.mystudy.audio.AudioManager
+import com.example.mystudy.loge
 import com.example.mystudy.utils.TtsUtils
 import kotlinx.android.synthetic.main.activity_audio.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch

@@ -1,7 +1,7 @@
 package com.example.opengl
 
 import android.opengl.GLES20.*
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 
 fun compileVertexShader(shaderCode: String): Int {
     return compileShader(GL_VERTEX_SHADER, shaderCode)

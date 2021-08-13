@@ -3,8 +3,7 @@ package com.example.mystudy.widgets
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.widget.TextView
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 
 class MyTextView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

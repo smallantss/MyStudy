@@ -4,7 +4,6 @@ import android.content.Context
 import android.opengl.*
 import android.opengl.GLES20.*
 import com.example.mystudy.R
-import com.example.mystudy.ui.loge
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer

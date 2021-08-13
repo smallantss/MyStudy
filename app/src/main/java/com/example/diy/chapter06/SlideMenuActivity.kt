@@ -1,19 +1,15 @@
 package com.example.diy.chapter06
 
-import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.FrameLayout
-import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.lifecycle.*
 import com.example.mystudy.R
 import com.example.mystudy.mvvm.viewmodel.MyViewModel
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 import com.example.mystudy.utils.LifecycleUtil
-import com.example.mystudy.utils.SingleLiveData
-import com.example.mystudy.utils.SingleLiveData2
 import kotlinx.android.synthetic.main.activity_slide_menu.*
 import kotlinx.coroutines.*
 

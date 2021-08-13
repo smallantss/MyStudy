@@ -1,17 +1,14 @@
 package com.example.diy.chapter06
 
 import android.content.Context
-import android.graphics.drawable.ColorDrawable
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.customview.widget.ViewDragHelper
 import androidx.customview.widget.ViewDragHelper.EDGE_LEFT
 import androidx.customview.widget.ViewDragHelper.EDGE_TOP
-import com.example.mystudy.R
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 import kotlinx.android.synthetic.main.activity_scroller.view.*
 
 class DragLayout @JvmOverloads constructor(

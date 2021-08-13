@@ -5,7 +5,6 @@ import android.graphics.*
 import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatImageView
 import com.example.mystudy.R
-import com.example.mystudy.ui.loge
 
 class CameraImageView @JvmOverloads constructor(
         context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

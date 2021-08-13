@@ -3,7 +3,7 @@ package com.example.diy.chapter03
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.mystudy.R
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 import kotlinx.android.synthetic.main.activity_widget.*
 
 class WidgetActivity : AppCompatActivity() {

@@ -7,14 +7,40 @@ android {
     defaultConfig {
         applicationId "com.example.mystudy"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
-    buildTypes {
+
+    signingConfigs {
+        mydebug {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file("../aisle.jks")
+            storePassword '123456'
+        }
         release {
+            keyAlias 'key0'
+            keyPassword '123456'
+            storeFile file("../aisle.jks")
+            storePassword '123456'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+            debuggable true
             minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false // 混淆
+            zipAlignEnabled true // Zipalign优化
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

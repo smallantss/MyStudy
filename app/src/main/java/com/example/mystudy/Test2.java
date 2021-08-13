@@ -1,6 +1,11 @@
 package com.example.mystudy;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -17,10 +22,54 @@ public class Test2 {
     boolean a;
 
     public static void main(String[] args) throws Exception {
-        testSemaphore();
-        byte[] data = new byte[4];
-        int b = 0;
-        b = data[0] & 0xff;
+        testSocket();
+    }
+
+    public static void testSocket() {
+        initServer();
+        initClient();
+    }
+
+    private static void initServer() {
+        new Thread(() -> {
+            try {
+                ServerSocket server = new ServerSocket(1234);
+                Socket socket = server.accept();
+                while (true){
+                    byte[] r = new byte[200];
+                    socket.getInputStream().read(r);
+                    print("server get data:"+new String(r, Charset.defaultCharset()));
+
+                    socket.getOutputStream().write("server data".getBytes());
+                    socket.getOutputStream().flush();
+                    print("server send data");
+                    Thread.sleep(1000);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    private static void initClient() {
+        new Thread(() -> {
+            Socket client = null;
+            try {
+                client = new Socket("localhost", 1234);
+                while (true){
+                    client.getOutputStream().write("client data".getBytes());
+                    client.getOutputStream().flush();
+                    print("client send data");
+                    byte[] r = new byte[200];
+                    client.getInputStream().read(r);
+                    print("client get data:"+new String(r, Charset.defaultCharset()));
+                    Thread.sleep(1000);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }).start();
     }
 
     public static void testSemaphore() {

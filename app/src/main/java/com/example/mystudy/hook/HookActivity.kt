@@ -9,9 +9,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Message
 import com.example.mystudy.R
-import com.example.mystudy.ui.loge
+import com.example.mystudy.loge
 import kotlinx.android.synthetic.main.activity_scroller.*
-import kotlinx.coroutines.delay
 import java.lang.Exception
 import kotlin.concurrent.thread
 
