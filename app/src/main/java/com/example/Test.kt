@@ -39,6 +39,7 @@ class Test {
         }
 
         private suspend fun studyStateFlow() {
+            val p = Person(10)
             val stateFlow = MutableStateFlow(Person(10))
             stateFlow.emit(Person(10))
             stateFlow.emit(Person(11))
