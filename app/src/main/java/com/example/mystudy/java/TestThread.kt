@@ -6,12 +6,21 @@ class TestThread {
 
         @JvmStatic
         fun main(args: Array<String>) {
+            testByte()
+        }
+
+        private fun testByte(){
+            val a: Byte = 1
+            val bit1 = (a.toInt() shr 0 and 1)
+            println(bit1)
+        }
+
+        private fun testLock(){
             val container = Container()
             Producer(container).start()
             Consumer(container).start()
         }
     }
-
 }
 
 class Consumer(private val container: Container) : Thread() {

@@ -1,6 +1,7 @@
 package com.example
 
 import com.example.mystudy.java.loader.DiskClassLoader
+import com.example.mystudy.map.Node
 import com.example.opengl.opencv.OpenCvUtil
 import com.google.gson.Gson
 import kotlinx.coroutines.*
@@ -35,7 +36,63 @@ class Test {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) = runBlocking {
-            studyStateFlow()
+            linkReverse()
+        }
+
+        private fun linkReverse() {
+            val head = Node().apply {
+                value = -1
+            }
+            var last = head
+            for (i in 0..3) {
+                var temp: Node = Node().apply {
+                    value = i
+                }
+                last.next = temp
+                last = temp
+            }
+            logLink(head)
+
+            reverseLink2(head)
+        }
+
+        private fun reverseLink2(node: Node?) {
+            var newNode = Node()
+            var head = node
+            while (head!=null){
+                val next = head.next
+                head.next = newNode.next
+                newNode.next = head
+                head = next
+            }
+            logLink(newNode.next)
+        }
+
+        private fun reverseLink(node: Node?) {
+            var before: Node? = null
+            var mid: Node? = node
+            var after: Node? = node?.next
+            mid?.next = before
+            after?.next = mid
+            println("before:${before?.value},mid:${mid?.value},after:${after?.value}")
+            //-1 0 1 2 3
+            while (after != null) {
+                before = mid
+                mid = after
+                after = after.next
+                mid.next = before
+                after.next = mid
+                println("before:${before?.value},mid:${mid?.value},after:${after?.value}")
+            }
+        }
+
+        private fun logLink(node: Node?) {
+            var temp = node
+            while (temp != null) {
+                println(temp.value)
+                temp = temp.next
+            }
+            println("end log link")
         }
 
         private suspend fun studyStateFlow() {
