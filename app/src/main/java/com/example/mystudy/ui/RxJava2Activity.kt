@@ -39,7 +39,7 @@ class RxJava2Activity : AppCompatActivity() {
             it.onNext("aaa")
             it.onComplete()
         }
-                .subscribeOn(Schedulers.newThread())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : io.reactivex.Observer<String> {
                     override fun onSubscribe(d: Disposable) {

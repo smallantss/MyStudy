@@ -105,3 +105,33 @@ repositories {
 //tasks.withType(JavaCompile){
 //    compileTask->compileTask.dependsOn(nativeLibsToJar)
 //}
+
+
+
+//def implDependencies = rootProject.ext.dependencies
+//def processors = rootProject.ext.annotationProcessor
+//def debugImplDependencies = rootProject.ext.debugImplDependencies
+//def fileDependencies = rootProject.ext.fileImpl
+//
+//dependencies {
+//    implementation fileTree(dir: "libs", include: ["*.jar"])
+//    implementation 'androidx.appcompat:appcompat:1.2.0'
+//    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+//
+//    //implementation
+//    implDependencies.each { k, v -> implementation v }
+//
+//    //kapt
+//    processors.each { k, v -> kapt v }
+//
+//    //debugImplementation
+//    debugImplDependencies.each { k, v -> debugImplementation v }
+//
+//    //implementation files
+//    fileDependencies.each { k, v -> implementation files(v) }
+//
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+//
+//}
